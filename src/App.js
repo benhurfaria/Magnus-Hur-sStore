@@ -1,9 +1,14 @@
 import React from 'react';
-
+import {BrowserRouter, Routes, Route} from "react-router-dom";
+import Signup from './Components/Signup';
 
 function App(){
     return(
-        <>oi</>
+        <BrowserRouter>
+            <Routes>
+                <Route exact path="/" element={<Signup/>}/>
+            </Routes>
+        </BrowserRouter>
     );
 }
 
