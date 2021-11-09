@@ -10,7 +10,7 @@ export default function Title(){
 }
 
 const Titulo = styled.h1`
-    font-family: 'Saira Stencil One', cursive;
+    font-family: 'Mochiy Pop P One', sans-serif;
     font-style: normal;
     font-weight: bold;
     font-size: 40px;
