@@ -19,7 +19,7 @@ export default function Signin(){
             password
         }
         
-        const promise = axios.post(api+"signin", body);
+        const promise = axios.post(api+"sign-in", body);
 
         promise.then(resp=>{
 
