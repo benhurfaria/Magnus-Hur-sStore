@@ -21,6 +21,7 @@ const Principal = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
 ` 
 const Texto = styled.p`
     text-align: center;
@@ -31,8 +32,8 @@ const Texto = styled.p`
     color: #FFFFFF;
 `
 const Botao = styled.button`
-    background-color: #A328D6;
-    width: 100%;
+    background-color: red;
+    width: 30%;
     height: 48px;
     margin-bottom:35px;
     border-radius: 5px;
@@ -47,7 +48,7 @@ const Botao = styled.button`
 const Input = styled.input`
     background: #FFFFFF;
     border-radius: 5px;
-    width: 100%;
+    width: 30%;
     height: 50px;
     margin-bottom: 10px;
     font-family: 'Raleway', sans-serif;
