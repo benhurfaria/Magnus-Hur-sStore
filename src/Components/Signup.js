@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Title from "./TItle";
+import Title from "./Title";
 export default function Signup(){
 
     return (
@@ -11,7 +11,6 @@ export default function Signup(){
             <Input placeholder="Confirme a senha" type="password" />
             <Botao >Cadastrar</Botao>
             <Texto>Já tem uma conta? Entre agora!</Texto>
-            
         </Principal>
     );
 }
