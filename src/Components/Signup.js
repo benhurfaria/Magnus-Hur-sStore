@@ -26,7 +26,7 @@ export default function Signup(){
                 history("/sign-in");
             }).catch(err=>{
                 if(err.response.status === 400){
-                    alert("email ja cadastrado");
+                    alert("Não foi possivel cadastrar");
                 }
                 if(err.response.status === 500){
                     alert("servidor fora de área");
