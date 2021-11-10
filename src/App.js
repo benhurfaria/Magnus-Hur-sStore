@@ -3,6 +3,7 @@ import Signin from './Components/Signin';
 import {ContextLogin} from "./Services/Context";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import { useState } from "react";
+import Home from './Components/pages/Home';
 
 function App(){
     const [loggedUser, setLoggedUser] = useState({});
@@ -11,6 +12,7 @@ function App(){
             <BrowserRouter>
                 <Routes>
                     <Route exact path="/" element={<Signin/>}/>
+                    <Route exact path="/home" element={<Home />}/>
                 </Routes>
             </BrowserRouter>
         </ContextLogin.Provider>
