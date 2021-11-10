@@ -44,7 +44,7 @@ export default function Signin(){
             <Title/>
             <Input placeholder="E-mail" type="email" value={email} onChange={e=> setEmail(e.target.value)}/>
             <Input placeholder="Senha" value={password} onChange={e=>setPassword(e.target.value)} type="password"/>
-            <Botao>Login</Botao>
+            <Botao onClick={login}>Login</Botao>
             <Link to="/sign-up">
                 <Texto>Primeira vez? Cadastre-se</Texto> 
             </Link>
