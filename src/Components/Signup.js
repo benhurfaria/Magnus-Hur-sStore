@@ -1,8 +1,6 @@
 import Title from "./Title";
-import {api} from "../Services/urlApi.js";
 import { useState } from "react";
 import { Link, useNavigate} from "react-router-dom";
-import axios from "axios";
 import {Principal, Texto, Botao, Input} from "./Signup_style.js";
 import { signUp } from "../Services/Api";
 
