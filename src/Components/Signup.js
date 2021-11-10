@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Link, useNavigate} from "react-router-dom";
 import axios from "axios";
 import {Principal, Texto, Botao, Input} from "./Signup_style.js";
+import { signUp } from "../Services/Api";
 
 export default function Signup(){
     const [nome, setNome] = useState("");
@@ -20,18 +21,11 @@ export default function Signup(){
             password
         }
         if(password === confirm){
-            const promise = axios.post(api+"sign-up", body);
+            const promise = signUp(body);
             promise.then(resp=>{
                 alert("cadastro feito com sucesso");
                 history("/sign-in");
-            }).catch(err=>{
-                if(err.response.status === 400){
-                    alert("Não foi possivel cadastrar");
-                }
-                if(err.response.status === 500){
-                    alert("servidor fora de área");
-                }
-            })
+            });
         }else{
             alert("Senhas diferentes");
         }

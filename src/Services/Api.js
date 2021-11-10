@@ -10,5 +10,18 @@ function signIn(body){
     });
     return promise;
 }
-
-export {signIn}
+function signUp(body){
+    const promise = axios.post(api+"sign-up", body);
+    
+    promise.catch(err=>{
+        if(err.response.status === 400){
+            alert("Não foi possivel cadastrar");
+        }
+        if(err.response.status === 500){
+            alert("servidor fora de área");
+        }
+    });
+    
+    return promise;
+}
+export {signIn, signUp}
