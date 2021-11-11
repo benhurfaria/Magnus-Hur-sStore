@@ -13,6 +13,7 @@ function getCartItens(id) {
   const promise = axios.get(urlApi + route + id);
   promise.catch((err) => {
     if (err.response.statusCode === 404) {
+      // eslint-disable-next-line no-alert
       alert('Não existem itens no carrinho!');
     }
   });
