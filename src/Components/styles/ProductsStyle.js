@@ -31,11 +31,13 @@ const Card = styled.div`
     justify-content: space-between;
 
     margin-bottom: 20px;
-    margin-right: 20px;
+    
     padding: 10px;
 
     @media (min-width: 1100px) {
         width: 20vw;
+
+        margin-right: 20px;
     }
 `;
 
