@@ -11,6 +11,21 @@ function signIn(body){
     return promise;
 }
 
+function signUp(body){
+    const promise = axios.post(api+"sign-up", body);
+    
+    promise.catch(err=>{
+        if(err.response.status === 400){
+            alert("Não foi possivel cadastrar");
+        }
+        if(err.response.status === 500){
+            alert("servidor fora de área");
+        }
+    });
+    
+    return promise;
+}
+
 function getProducts() {
     const promise = axios.get(`${api}products`);
     return promise;
@@ -33,6 +48,7 @@ function getProductsHigher() {
 
 export {
     signIn,
+    signUp,
     getProducts,
     getProductsAlpha,
     getProductsLower,
