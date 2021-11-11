@@ -66,7 +66,7 @@ const PageTitle = styled.h2`
     color: #283D3B;
     font-size: 26px;
 
-    margin: 100px auto 20px;
+    margin: 140px auto 20px;
 `;
 
 const InputSearch = styled.input`

@@ -1,0 +1,67 @@
+import styled from "styled-components";
+
+const ProductsContainer = styled.div`
+    width: 90vw;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+`;
+
+const Card = styled.div`
+    width: 42vw;
+
+    background-color: #ffffff;
+
+    border-radius: 10px;
+    box-shadow: 0px 0px 2px 2px rgba(227, 151, 116, 0.2);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 20px;
+    padding: 10px;
+`;
+
+const Image = styled.img`
+    width: 30vw;
+    height: 30vw;
+
+    border-radius: 10px;
+    border: 2px solid #326273;
+
+    object-fit: cover;
+    margin-bottom: 10px;
+`;
+
+const ProductName = styled.h3`
+    width: 30vw;
+    color: #283D3B;
+
+    font-size: 20px;
+    text-align: left;
+
+    margin-bottom: 10px;
+    overflow: hidden;
+`;
+
+const Price = styled.h3`
+    width: 30vw;
+    color: #772E25;
+
+    font-size: 20px;
+    text-align: left;
+
+    margin-bottom: 10px;
+    overflow: hidden;
+`;
+
+export {
+    ProductsContainer,
+    Card,
+    Image,
+    ProductName,
+    Price,
+}
