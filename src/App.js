@@ -1,10 +1,13 @@
-import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Cart from './Cart/Cart.js';
 
-
-function App(){
-    return(
-        <>oi</>
-    );
+export default function App() {
+  return (
+  <BrowserRouter>
+      <Routes>
+          <Route path="/" element={<>oi</>}/>
+          <Route path='/cart' element={<Cart/>}/>
+      </Routes>
+  </BrowserRouter>
+  );
 }
-
-export default App;
