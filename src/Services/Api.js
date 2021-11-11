@@ -11,4 +11,12 @@ function signIn(body){
     return promise;
 }
 
-export {signIn}
+function getProducts() {
+    const promise = axios.get(`${api}products`);
+    return promise;
+}
+
+export {
+    signIn,
+    getProducts,
+}

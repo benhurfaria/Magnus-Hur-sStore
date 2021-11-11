@@ -6,6 +6,11 @@ const ProductsContainer = styled.div`
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
+
+    span {
+        color: #808080;
+        font-size: 20px;
+    }
 `;
 
 const Card = styled.div`
@@ -23,6 +28,10 @@ const Card = styled.div`
 
     margin-bottom: 20px;
     padding: 10px;
+
+    @media (min-width: 1100px) {
+        width: 20vw;
+    }
 `;
 
 const Image = styled.img`
@@ -34,6 +43,11 @@ const Image = styled.img`
 
     object-fit: cover;
     margin-bottom: 10px;
+
+    @media (min-width: 1100px) {
+        width: 15vw;
+        height: 15vw;
+    }
 `;
 
 const ProductName = styled.h3`
@@ -45,6 +59,10 @@ const ProductName = styled.h3`
 
     margin-bottom: 10px;
     overflow: hidden;
+
+    @media (min-width: 1100px) {
+        width: 15vw;
+    }
 `;
 
 const Price = styled.h3`
@@ -56,6 +74,10 @@ const Price = styled.h3`
 
     margin-bottom: 10px;
     overflow: hidden;
+
+    @media (min-width: 1100px) {
+        width: 15vw;
+    }
 `;
 
 export {

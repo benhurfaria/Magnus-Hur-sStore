@@ -1,8 +1,9 @@
-import { InputSearch, MenuHeader, PageHeader, StoreTitle, Title } from "./styles/PageTitle";
+import { InputSearch, Title } from "./styles/PageTitle";
 
 import { HiOutlineMenu } from 'react-icons/hi'
 import { BsCartCheckFill, BsSearch } from 'react-icons/bs'
 import { Link } from "react-router-dom";
+import { MenuHeader, PageHeader, Search, StoreTitle } from "./styles/PageContainer";
 
 export default function Header() {
     return (
@@ -13,8 +14,10 @@ export default function Header() {
                     <Link to='/home' >
                         <HiOutlineMenu />
                     </Link>
-                    <InputSearch />
-                    <BsSearch color='#ffffff' font-size='26px' font-weight='bold' />
+                    <Search>
+                        <InputSearch />
+                        <BsSearch color='#ffffff' font-size='26px' font-weight='bold' />
+                    </Search>
                     <Link to='/carrinho' >
                         <BsCartCheckFill />
                     </Link>
