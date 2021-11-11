@@ -16,7 +16,19 @@ function getProducts() {
     return promise;
 }
 
+function getProductsLower() {
+    const promise = axios.get(`${api}products?ordenacao=lowerPrice`);
+    return promise;
+}
+
+function getProductsHigher() {
+    const promise = axios.get(`${api}products?ordenacao=higherPrice`);
+    return promise;
+}
+
 export {
     signIn,
     getProducts,
+    getProductsLower,
+    getProductsHigher,
 }

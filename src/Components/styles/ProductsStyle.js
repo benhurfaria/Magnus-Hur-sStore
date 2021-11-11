@@ -5,11 +5,15 @@ const ProductsContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
 
     span {
         color: #808080;
         font-size: 20px;
+    }
+
+    @media (max-width: 1100px) {
+        justify-content: space-between;
     }
 `;
 
@@ -27,6 +31,7 @@ const Card = styled.div`
     justify-content: space-between;
 
     margin-bottom: 20px;
+    margin-right: 20px;
     padding: 10px;
 
     @media (min-width: 1100px) {

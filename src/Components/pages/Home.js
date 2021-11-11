@@ -4,7 +4,7 @@ import Header from '../Header'
 import { Arrow, Menu, MenuBar, Order, PageOrder, PageTitle } from "../styles/PageTitle";
 import ProductsCard from "../ProductsCard";
 import { ProductsContainer } from "../styles/ProductsStyle";
-import { getProducts } from "../../Services/Api";
+import { getProducts, getProductsHigher, getProductsLower } from "../../Services/Api";
 
 export default function Home() {
     const [modal, setModal] = useState(false);
@@ -38,7 +38,7 @@ export default function Home() {
             </PageOrder>
 
             {navbar ?
-                <MenuOrder setNavbar={setNavbar} />
+                <MenuOrder setNavbar={setNavbar} setProducts={setProducts} />
                 : ''
             }
             <ProductsContainer>
@@ -53,18 +53,33 @@ export default function Home() {
     );
 }
 
-function MenuOrder({setNavbar}) {
+function MenuOrder({ setNavbar, setProducts }) {
 
     function closeNavbar() {
         setNavbar(false)
+    }
+
+    // function alpha() {
+    //     getProductsAlpha().then((res) => setProducts(res.data)).catch((err) => console.log(err));
+    // }
+
+    function lowerPrice() {
+        console.log('?ordenacao=lowerPrice')
+        getProductsLower().then((res) => setProducts(res.data)).catch((err) => console.log(err));
+    }
+
+    function higherPrice() {
+
+        console.log('?ordenacao=higherPrice')
+        getProductsHigher().then((res) => setProducts(res.data)).catch((err) => console.log(err));
     }
 
     return (
         <Menu onClick={closeNavbar}>
             <MenuBar>
                 <button>A-Z</button>
-                <button>Menor preço</button>
-                <button>Maior preço</button>
+                <button onClick={() => lowerPrice()} >Menor preço</button>
+                <button onClick={() => higherPrice()} >Maior preço</button>
             </MenuBar>
         </Menu>
     )

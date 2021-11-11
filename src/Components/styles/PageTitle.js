@@ -63,7 +63,7 @@ const MenuBar = styled.div`
     position: absolute;
     right: 5vw;
     top: 46px;
-
+    z-index: 1000;
     button {
         width: 100%;
         height: 15vw;
@@ -138,6 +138,7 @@ const Order = styled.div`
 
     border-radius: 5px;
     background-color: #ffffff;
+    box-shadow: 0px 0px 2px 2px rgba(227, 151, 116, 0.2);
 
     display: flex;
     align-items: center;

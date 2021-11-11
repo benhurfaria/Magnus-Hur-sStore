@@ -6,7 +6,7 @@ const PageContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: ${ (props) => props.page === "center" ? "center" : "flex-start" };
+	justify-content: flex-start;
 
 	margin: 0 auto 100px;
 
@@ -16,10 +16,6 @@ const PageContainer = styled.div`
         color: #326273;
         font-size: 15px;
         font-weight: bold;
-    }
-
-    form {
-        margin-top: ${ (props) => props.page === "center" ? "0" : "100px" };
     }
 `;
 
@@ -78,6 +74,10 @@ const Search = styled.div`
     margin: 0 auto;
 
     box-sizing: border-box;
+
+    @media (max-width: 700px) {
+        width: 70vw;
+    }
 
     @media (min-width: 1100px) {
         width: 62vw;
