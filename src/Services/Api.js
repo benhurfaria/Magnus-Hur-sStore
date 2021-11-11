@@ -16,6 +16,11 @@ function getProducts() {
     return promise;
 }
 
+function getProductsAlpha() {
+    const promise = axios.get(`${api}products?ordenacao=alpha`);
+    return promise;
+}
+
 function getProductsLower() {
     const promise = axios.get(`${api}products?ordenacao=lowerPrice`);
     return promise;
@@ -29,6 +34,7 @@ function getProductsHigher() {
 export {
     signIn,
     getProducts,
+    getProductsAlpha,
     getProductsLower,
     getProductsHigher,
 }

@@ -4,7 +4,7 @@ import Header from '../Header'
 import { Arrow, Menu, MenuBar, Order, PageOrder, PageTitle } from "../styles/PageTitle";
 import ProductsCard from "../ProductsCard";
 import { ProductsContainer } from "../styles/ProductsStyle";
-import { getProducts, getProductsHigher, getProductsLower } from "../../Services/Api";
+import { getProducts, getProductsAlpha, getProductsHigher, getProductsLower } from "../../Services/Api";
 
 export default function Home() {
     const [modal, setModal] = useState(false);
@@ -59,9 +59,9 @@ function MenuOrder({ setNavbar, setProducts }) {
         setNavbar(false)
     }
 
-    // function alpha() {
-    //     getProductsAlpha().then((res) => setProducts(res.data)).catch((err) => console.log(err));
-    // }
+    function alpha() {
+        getProductsAlpha().then((res) => setProducts(res.data)).catch((err) => console.log(err));
+    }
 
     function lowerPrice() {
         console.log('?ordenacao=lowerPrice')
@@ -77,7 +77,7 @@ function MenuOrder({ setNavbar, setProducts }) {
     return (
         <Menu onClick={closeNavbar}>
             <MenuBar>
-                <button>A-Z</button>
+                <button onClick={() => alpha()} >A-Z</button>
                 <button onClick={() => lowerPrice()} >Menor preço</button>
                 <button onClick={() => higherPrice()} >Maior preço</button>
             </MenuBar>
