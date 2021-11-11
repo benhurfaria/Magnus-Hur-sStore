@@ -21,9 +21,7 @@ export default function Home() {
 
     useEffect(() => {
         getProducts().then((res) => setProducts(res.data)).catch((err) => console.log(err));
-    }, [])
-    console.log(products);
-    console.log(products);
+    }, []);
 
     return (
         <PageContainer>
@@ -64,13 +62,10 @@ function MenuOrder({ setNavbar, setProducts }) {
     }
 
     function lowerPrice() {
-        console.log('?ordenacao=lowerPrice')
         getProductsLower().then((res) => setProducts(res.data)).catch((err) => console.log(err));
     }
 
     function higherPrice() {
-
-        console.log('?ordenacao=higherPrice')
         getProductsHigher().then((res) => setProducts(res.data)).catch((err) => console.log(err));
     }
 
