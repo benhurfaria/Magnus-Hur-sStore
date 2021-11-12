@@ -25,7 +25,19 @@ export default function Cart() {
     return (total / 100).toFixed(2);
   }
   const navigate = useNavigate();
-  function removeIten() {
+  function removeIten(e) {
+    const stay = [];
+    const remove = [];
+    itens.forEach((el, index) => {
+      if (index !== Number(e.target.id)) {
+        stay.push(el);
+      } else {
+        remove.push(el);
+      }
+    });
+    // eslint-disable-next-line no-console
+    console.log(remove);
+    setItens([...stay]);
     setCounter(counter - 1);
   }
   function closeOrder() {
@@ -49,12 +61,12 @@ export default function Cart() {
       <CartContainer>
         <CartTitle>Carinho</CartTitle>
         <CartItens>
-              {itens.map((iten, index) => <Iten key={index}>
-                            <Img src={iten.imgeUrl}/>
-                            {iten.name}
-                            <RemoveButton onClick={removeIten}>Remover</RemoveButton>
-                            <ItenValue> R$ {(iten.unitaryPrice / 100).toFixed(2)}</ItenValue>
-                          </Iten>)}
+          {itens.map((iten, index) => <Iten key={index}>
+            <Img src={iten.imgeUrl}/>
+              {iten.name}
+            <RemoveButton id={index} onClick={(e) => removeIten(e)}>Remover</RemoveButton>
+            <ItenValue> R$ {(iten.unitaryPrice / 100).toFixed(2)}</ItenValue>
+         </Iten>)}
         </CartItens>
         <CartResume>
             Valor Total:

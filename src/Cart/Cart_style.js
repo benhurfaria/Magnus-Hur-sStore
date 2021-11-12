@@ -24,9 +24,9 @@ const CartContainer = styled.div`
   margin-top: 10px;
   display: flex;
   width: 100vw;
-  height: 100vh;
+  height: 570px;
   flex-direction: column;
-  justify-content: space-around;
+  //justify-content: space-around;
 `;
 const CartTitle = styled.div`
   font-family: 'Roboto', sans-serif;
@@ -36,10 +36,12 @@ const CartTitle = styled.div`
   padding-left: 20px;
 `;
 const CartItens = styled.div`
-  height: fit-content;
+  margin: 10px 0 10px 0;
+  height: 50vh;
   width: 100vw;
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
 `;
 const CartResume = styled.div`
   height: 200px;
@@ -114,8 +116,8 @@ const CartCounter = styled.div`
   justify-content: center;
   align-items: center;
   border-radius: 50px;
-  height: 20px;
-  width: 20px;
+  height: 25px;
+  width: 25px;
   font-size: 16px;
   background-color: #ffffff;
   color: #326273;
