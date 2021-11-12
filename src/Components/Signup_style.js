@@ -15,11 +15,11 @@ const Texto = styled.p`
     font-family: 'Mochiy Pop P One', sans-serif;
     font-weight: bold;
     font-size: 14px;
-    color: #FFFFFF;
+    color: #326273;
 `
 const Botao = styled.button`
-    background-color: red;
-    width: 30%;
+    background-color: #326273;
+    width: 100%;
     height: 48px;
     margin-bottom:35px;
     border-radius: 5px;
@@ -34,7 +34,7 @@ const Botao = styled.button`
 const Input = styled.input`
     background: #FFFFFF;
     border-radius: 5px;
-    width: 30%;
+    width: 100%;
     height: 50px;
     margin-bottom: 10px;
     font-family: 'Roboto', sans-serif;
