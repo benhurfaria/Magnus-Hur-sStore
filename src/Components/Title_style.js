@@ -5,7 +5,7 @@ const Titulo = styled.h1`
     font-style: normal;
     font-weight: bold;
     font-size: 40px;
-    color: #FFFFFF;
+    color: #326273;
     text-align: center;
     margin: 80px;
 `;
