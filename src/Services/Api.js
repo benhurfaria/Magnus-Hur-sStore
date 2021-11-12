@@ -10,6 +10,7 @@ function signIn(body){
     });
     return promise;
 }
+
 function signUp(body){
     const promise = axios.post(api+"sign-up", body);
     
@@ -24,4 +25,32 @@ function signUp(body){
     
     return promise;
 }
-export {signIn, signUp}
+
+function getProducts() {
+    const promise = axios.get(`${api}products`);
+    return promise;
+}
+
+function getProductsAlpha() {
+    const promise = axios.get(`${api}products?ordenacao=alpha`);
+    return promise;
+}
+
+function getProductsLower() {
+    const promise = axios.get(`${api}products?ordenacao=lowerPrice`);
+    return promise;
+}
+
+function getProductsHigher() {
+    const promise = axios.get(`${api}products?ordenacao=higherPrice`);
+    return promise;
+}
+
+export {
+    signIn,
+    signUp,
+    getProducts,
+    getProductsAlpha,
+    getProductsLower,
+    getProductsHigher,
+}
