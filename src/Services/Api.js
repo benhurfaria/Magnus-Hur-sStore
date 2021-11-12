@@ -31,10 +31,16 @@ function getProductsHigher() {
     return promise;
 }
 
+function getProductById(id) {
+    const promise = axios.get(`${api}products/${id}`);
+    return promise;
+}
+
 export {
     signIn,
     getProducts,
     getProductsAlpha,
     getProductsLower,
     getProductsHigher,
+    getProductById,
 }
