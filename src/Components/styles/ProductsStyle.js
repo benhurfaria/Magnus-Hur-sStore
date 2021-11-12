@@ -95,6 +95,8 @@ const Description = styled.div`
     width: 90vw;
     height: 35vw;
 
+    color: #283D3B;
+
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -104,6 +106,14 @@ const Description = styled.div`
         font-size: 40px;
 
         margin-bottom: 30px;
+    }
+
+    li {
+        font-size: 26px;
+    }
+
+    @media (max-width: 1100px) {
+        height: auto;
     }
 
     @media (min-width: 1100px) {
@@ -125,6 +135,20 @@ const CardInfo = styled.div`
     }
 `;
 
+const Quant = styled.h2`
+    font-size: 26px;
+    margin-bottom: 20px;
+
+    span {
+        font-size: 30px;
+    }
+`;
+
+const QuantModify = styled.span`
+    color: ${(props) => props.color === 'red' ? '#C44536' : '#197278'};
+    cursor: pointer;
+`;
+
 export {
     ProductsContainer,
     Card,
@@ -133,4 +157,6 @@ export {
     Price,
     Description,
     CardInfo,
+    Quant,
+    QuantModify,
 }
