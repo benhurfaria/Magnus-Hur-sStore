@@ -9,7 +9,9 @@ export default function Header() {
     return (
         <PageHeader>
             <StoreTitle>
-                <Title>Magnus&Hur's</Title>
+                <Link to='/home'>
+                    <Title>Magnus&Hur's</Title>
+                </Link>
                 <MenuHeader>
                     <Link to='/home' >
                         <HiOutlineMenu />

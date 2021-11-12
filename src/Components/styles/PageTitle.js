@@ -12,6 +12,8 @@ const Title = styled.h1`
     font-weight: bold;
     text-align: center;
 
+    cursor: pointer;
+
     margin-bottom: 10px;
 `;
 
@@ -114,6 +116,7 @@ const PageTitle = styled.h2`
     @media (min-width: 1100px) {
         width: 60vw;
         margin: 140px 0 20px;
+        font-size: 40px;
     }
 `;
 
@@ -146,6 +149,8 @@ const Order = styled.div`
 
     margin: 140px auto 20px;
 
+    cursor: pointer;
+
     span {
         color: #283D3B;
         text-align: center;
@@ -168,8 +173,6 @@ const Arrow = styled(FaChevronDown)`
     color: #283D3B;
 
     transform: ${(props) => props.navbar === true ? "rotate(180deg)" : ""};
-
-    cursor: pointer;
 
     margin: 0 15px;
 `

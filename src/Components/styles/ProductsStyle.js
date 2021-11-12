@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const ProductsContainer = styled.div`
     width: 90vw;
-    
+
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -19,7 +19,7 @@ const ProductsContainer = styled.div`
 `;
 
 const Card = styled.div`
-    width: ${(props) => props.type === 'all' ? '42vw' : '90vw'};
+    width: ${(props) => (props.type === "all" ? "42vw" : "90vw")};
 
     background-color: #ffffff;
 
@@ -31,39 +31,41 @@ const Card = styled.div`
     align-items: center;
     justify-content: space-between;
 
-    margin: ${(props) => props.type === 'all' ? '' : '140px auto 0'};
+    margin: ${(props) => (props.type === "all" ? "" : "140px auto 0")};
     margin-bottom: 20px;
-    
+
     padding: 10px;
 
-    @media (min-width: 1100px) {
-        width: ${(props) => props.type === 'all' ? '20vw' : '40vw'};
+    cursor: pointer;
 
-        margin-right: ${(props) => props.type === 'all' ? '20px' : ''};
-        margin-left: ${(props) => props.type === 'all' ? '' : '20px'};
+    @media (min-width: 1100px) {
+        width: ${(props) => (props.type === "all" ? "20vw" : "40vw")};
+
+        margin-right: ${(props) => (props.type === "all" ? "20px" : "")};
+        margin-left: ${(props) => (props.type === "all" ? "" : "20px")};
     }
 `;
 
 const Image = styled.img`
-    width: ${(props) => props.type === 'all' ? '15vw' : '80vw'};
-    height: ${(props) => props.type === 'all' ? '15vw' : '80vw'};
+    width: ${(props) => (props.type === "all" ? "30vw" : "80vw")};
+    height: ${(props) => (props.type === "all" ? "30vw" : "80vw")};
 
     border-radius: 10px;
     border: 2px solid #326273;
 
     object-fit: cover;
-    margin-bottom: ${(props) => props.type === 'all' ? '10px' : '20px'};
-    margin-top: ${(props) => props.type === 'all' ? '' : '20px'};
+    margin-bottom: ${(props) => (props.type === "all" ? "10px" : "20px")};
+    margin-top: ${(props) => (props.type === "all" ? "" : "20px")};
 
     @media (min-width: 1100px) {
-        width: ${(props) => props.type === 'all' ? '15vw' : '30vw'};
-        height: ${(props) => props.type === 'all' ? '15vw' : '30vw'};
+        width: ${(props) => (props.type === "all" ? "15vw" : "30vw")};
+        height: ${(props) => (props.type === "all" ? "15vw" : "30vw")};
     }
 `;
 
 const ProductName = styled.h3`
     width: 30vw;
-    color: #283D3B;
+    color: #283d3b;
 
     font-size: 20px;
     text-align: left;
@@ -78,7 +80,7 @@ const ProductName = styled.h3`
 
 const Price = styled.h3`
     width: 30vw;
-    color: #772E25;
+    color: #772e25;
 
     font-size: 20px;
     text-align: left;
@@ -95,7 +97,7 @@ const Description = styled.div`
     width: 90vw;
     height: 35vw;
 
-    color: #283D3B;
+    color: #283d3b;
 
     display: flex;
     flex-direction: column;
@@ -145,7 +147,7 @@ const Quant = styled.h2`
 `;
 
 const QuantModify = styled.span`
-    color: ${(props) => props.color === 'red' ? '#C44536' : '#197278'};
+    color: ${(props) => (props.color === "red" ? "#C44536" : "#197278")};
     cursor: pointer;
 `;
 
@@ -159,4 +161,4 @@ export {
     CardInfo,
     Quant,
     QuantModify,
-}
+};
