@@ -13,8 +13,23 @@ const Texto = styled.p`
     text-align: center;
     margin-top:20px;
     font-family: 'Mochiy Pop P One', sans-serif;
+    font-weight: bold;
     font-size: 14px;
     color: #326273;
+`
+const Botao = styled.button`
+    background-color: #326273;
+    width: 100%;
+    height: 48px;
+    margin-bottom:35px;
+    border-radius: 5px;
+    border: none;
+    font-size: 20px;
+    margin-top: 10px;
+    color: #FFFFFF;
+    :focus{
+        outline: transparent;
+    }
 `
 const Input = styled.input`
     background: #FFFFFF;
@@ -34,20 +49,4 @@ const Input = styled.input`
     }
 `;
 
-const Botao = styled.button`
-    background-color: #326273;
-    width: 100%;
-    height: 48px;
-    margin-bottom:35px;
-    border-radius: 5px;
-    border: none;
-    font-size: 20px;
-    margin-top: 10px;
-    color: #FFFFFF;
-    font-family: 'Roboto', sans-serif;
-    :focus{
-        outline: transparent;
-    }
-`
-
-export {Principal, Texto, Input, Botao}
+export {Principal, Texto, Botao, Input}

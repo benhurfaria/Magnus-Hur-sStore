@@ -30,10 +30,10 @@ export default function Signin(){
         });
     }
 
-    useEffect(()=>{
+    /*useEffect(()=>{
         const user = getStoredUser();
-        user ? history("/store") : history("/");
-    },[history]);
+        user ? history("/store") : history("/sign-in");
+    },[history]);*/
     
     return(
         <Principal>
