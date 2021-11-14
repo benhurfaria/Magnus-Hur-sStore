@@ -40,11 +40,9 @@ export default function Product() {
     }, [quant]);
 
     function toBuy() {
-        console.log('compra')
         window.localStorage.setItem('carrinho', JSON.stringify(productToBuy));
     }
 
-console.log(productToBuy)
     return (
         <PageContainer>
             <Header />
