@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 const ProductsContainer = styled.div`
     width: 90vw;
+    
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -18,7 +19,7 @@ const ProductsContainer = styled.div`
 `;
 
 const Card = styled.div`
-    width: 42vw;
+    width: ${(props) => props.type === 'all' ? '42vw' : '90vw'};
 
     background-color: #ffffff;
 
@@ -30,30 +31,33 @@ const Card = styled.div`
     align-items: center;
     justify-content: space-between;
 
+    margin: ${(props) => props.type === 'all' ? '' : '140px auto 0'};
     margin-bottom: 20px;
     
     padding: 10px;
 
     @media (min-width: 1100px) {
-        width: 20vw;
+        width: ${(props) => props.type === 'all' ? '20vw' : '40vw'};
 
-        margin-right: 20px;
+        margin-right: ${(props) => props.type === 'all' ? '20px' : ''};
+        margin-left: ${(props) => props.type === 'all' ? '' : '20px'};
     }
 `;
 
 const Image = styled.img`
-    width: 30vw;
-    height: 30vw;
+    width: ${(props) => props.type === 'all' ? '15vw' : '80vw'};
+    height: ${(props) => props.type === 'all' ? '15vw' : '80vw'};
 
     border-radius: 10px;
     border: 2px solid #326273;
 
     object-fit: cover;
-    margin-bottom: 10px;
+    margin-bottom: ${(props) => props.type === 'all' ? '10px' : '20px'};
+    margin-top: ${(props) => props.type === 'all' ? '' : '20px'};
 
     @media (min-width: 1100px) {
-        width: 15vw;
-        height: 15vw;
+        width: ${(props) => props.type === 'all' ? '15vw' : '30vw'};
+        height: ${(props) => props.type === 'all' ? '15vw' : '30vw'};
     }
 `;
 
@@ -87,10 +91,72 @@ const Price = styled.h3`
     }
 `;
 
+const Description = styled.div`
+    width: 90vw;
+    height: 35vw;
+
+    color: #283D3B;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    span {
+        font-size: 40px;
+
+        margin-bottom: 30px;
+    }
+
+    li {
+        font-size: 26px;
+    }
+
+    @media (max-width: 1100px) {
+        height: auto;
+    }
+
+    @media (min-width: 1100px) {
+        width: 50vw;
+
+        margin: 140px 0 0 100px;
+    }
+`;
+
+const CardInfo = styled.div`
+    width: 90vw;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @media (max-width: 1100px) {
+        flex-direction: column;
+    }
+`;
+
+const Quant = styled.h2`
+    font-size: 26px;
+    margin-bottom: 20px;
+
+    span {
+        font-size: 30px;
+    }
+`;
+
+const QuantModify = styled.span`
+    color: ${(props) => props.color === 'red' ? '#C44536' : '#197278'};
+    cursor: pointer;
+`;
+
 export {
     ProductsContainer,
     Card,
     Image,
     ProductName,
     Price,
+    Description,
+    CardInfo,
+    Quant,
+    QuantModify,
 }

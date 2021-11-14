@@ -42,7 +42,7 @@ export default function Home() {
             <ProductsContainer>
                 {
                     products.length ?
-                        products.map((prod) => <ProductsCard id={prod.id} name={prod.name} price={prod.price} image={prod.imgeUrl} />)
+                        products.map((prod) => <ProductsCard id={prod.id} name={prod.name} price={prod.price} image={prod.imgeUrl} type='all' />)
                     : (<span>Não há produtos cadastrados</span>)
                 }
             </ProductsContainer>
