@@ -23,7 +23,7 @@ export default function Signin() {
     promise.then((resp) => {
       storeUser(resp.data);
       setLoggedUser(resp.data);
-      history('/store');
+      history('/home');
     });
   }
   return (

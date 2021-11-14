@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import axios from 'axios';
 import { api } from './urlApi';
 
@@ -9,21 +10,17 @@ function removeFromCart() {
   const route = '/removefromcart';
   axios.post(urlApi + route, body);
 }
+
 function getCartItens(id) {
   const route = '/cartitens/';
   const promise = axios.get(urlApi + route + id);
-  promise.catch((err) => {
-    if (err.response.statusCode === 404) {
-      // eslint-disable-next-line no-alert
-      alert('Não existem itens no carrinho!');
-    }
-  });
+  promise.catch((err) => { console.log(err); });
   return promise;
 }
 
 function signIn(body) {
-  const route = 'sign-in';
-  const promise = axios.post(api + route, body);
+  const route = '/sign-in';
+  const promise = axios.post(urlApi + route, body);
   promise.catch((err) => {
     if (err.response.status === 401) {
       // eslint-disable-next-line no-alert
@@ -47,10 +44,40 @@ function signUp(body) {
   });
   return promise;
 }
-function removeIten() {
+function itenRemove(id) {
+  const route = `/remove/${id}`;
+  const promise = axios.delete(urlApi + route);
+  promise.catch((err) => { console.log(err); });
+}
+
+function getProducts() {
+  const promise = axios.get(`${api}products`);
+  return promise;
+}
+
+function getProductsAlpha() {
+  const promise = axios.get(`${api}products?ordenacao=alpha`);
+  return promise;
+}
+
+function getProductsLower() {
+  const promise = axios.get(`${api}products?ordenacao=lowerPrice`);
+  return promise;
+}
+
+function getProductsHigher() {
+  const promise = axios.get(`${api}products?ordenacao=higherPrice`);
+  return promise;
 }
 
 export {
-  signIn, signUp,
-  removeFromCart, getCartItens, removeIten,
+  signIn,
+  signUp,
+  getProducts,
+  getProductsAlpha,
+  getProductsLower,
+  getProductsHigher,
+  removeFromCart,
+  getCartItens,
+  itenRemove,
 };

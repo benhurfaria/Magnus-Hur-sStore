@@ -36,12 +36,21 @@ const CartTitle = styled.div`
   padding-left: 20px;
 `;
 const CartItens = styled.div`
-  margin: 10px 0 10px 0;
+  font-family: 'Roboto', sans-serif;
+  margin: 10px 5px 10px 5px;
   height: 50vh;
   width: 100vw;
   display: flex;
   flex-direction: column;
   overflow-y: auto;
+`;
+const EmptyCart = styled.div`
+  width: 100%;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 26px;
 `;
 const CartResume = styled.div`
   height: 200px;
@@ -125,5 +134,5 @@ const CartCounter = styled.div`
 export {
   Top, CartPage, Menu, CartContainer, CartItens, CartResume, Iten,
   Img, RemoveButton, ItenValue, ItenQtd, PlusButton, MinusButton, CloseOrder, FinalValue,
-  CartMenu, CartCounter, CartTitle,
+  CartMenu, CartCounter, CartTitle, EmptyCart,
 };

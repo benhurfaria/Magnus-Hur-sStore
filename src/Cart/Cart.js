@@ -1,18 +1,20 @@
+/* eslint-disable no-unneeded-ternary */
 import { useState, useEffect } from 'react';
 import { IoCart, IoArrowBack } from 'react-icons/io5';
 import { Link, useNavigate } from 'react-router-dom';
-import { removeFromCart, getCartItens } from '../Services/Api.js';
+import { getCartItens, itenRemove } from '../Services/Api.js';
+import { getStoredUser } from '../Services/loginPersistence.js';
 import {
   Top, CartPage, Menu, CartContainer, CartItens, CartResume, Iten,
   Img, RemoveButton, ItenValue, CloseOrder, FinalValue,
-  CartMenu, CartCounter, CartTitle,
+  CartMenu, CartCounter, CartTitle, EmptyCart,
 } from './Cart_style.js';
 
 export default function Cart() {
   const [counter, setCounter] = useState(0);
   const [itens, setItens] = useState([]);
   useEffect(() => {
-    const id = 1;
+    const { id } = getStoredUser();
     const promise = getCartItens(id);
     promise.then((res) => {
       setItens(res.data.itens);
@@ -28,21 +30,22 @@ export default function Cart() {
   function removeIten(e) {
     const stay = [];
     const remove = [];
-    itens.forEach((el, index) => {
-      if (index !== Number(e.target.id)) {
+    itens.forEach((el) => {
+      if (el.cartProductsId !== Number(e.target.id)) {
         stay.push(el);
       } else {
+        // eslint-disable-next-line no-console
+        console.log(el.cartProductsId);
+        itenRemove(el.cartProductsId);
         remove.push(el);
       }
     });
     // eslint-disable-next-line no-console
-    console.log(remove);
     setItens([...stay]);
     setCounter(counter - 1);
   }
   function closeOrder() {
-    removeFromCart();
-    navigate('/cart');
+    navigate('/home');
   }
   return (
     <CartPage>
@@ -61,17 +64,20 @@ export default function Cart() {
       <CartContainer>
         <CartTitle>Carinho</CartTitle>
         <CartItens>
-          {itens.map((iten, index) => <Iten key={index}>
+          {!itens.length ? <EmptyCart>O carrinho está vazio</EmptyCart>
+            : itens.map((iten, index) => <Iten key={index}>
             <Img src={iten.imgeUrl}/>
               {iten.name}
-            <RemoveButton id={index} onClick={(e) => removeIten(e)}>Remover</RemoveButton>
-            <ItenValue> R$ {(iten.unitaryPrice / 100).toFixed(2)}</ItenValue>
+            <RemoveButton id={iten.cartProductsId}
+            onClick={(e) => removeIten(e)}>Remover</RemoveButton>
+            <ItenValue> R$ {(iten.unitaryPrice / 100).toFixed(2).replace('.', ',')}</ItenValue>
          </Iten>)}
         </CartItens>
         <CartResume>
-            Valor Total:
-            <FinalValue>R$ {getTotalValue()}</FinalValue>
-            <CloseOrder onClick={closeOrder}>Fechar Pedido</CloseOrder>
+          Valor Total:
+          <FinalValue>R$ {getTotalValue()}</FinalValue>
+          <CloseOrder onClick={closeOrder}
+                      disabled={!itens.length ? true : false}>Fechar Pedido</CloseOrder>
         </CartResume>
       </CartContainer>
     </CartPage>
