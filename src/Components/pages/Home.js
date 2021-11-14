@@ -58,8 +58,9 @@ export default function Home() {
       )}
       <ProductsContainer>
         {products.length ? (
-          products.map((prod) => (
+          products.map((prod, index) => (
             <ProductsCard
+              key={index}
               id={prod.id}
               name={prod.name}
               price={prod.price}

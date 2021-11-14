@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable no-unneeded-ternary */
 import { useState, useEffect } from 'react';
 import { IoCart, IoArrowBack } from 'react-icons/io5';
@@ -45,7 +46,7 @@ export default function Cart() {
     setCounter(counter - 1);
   }
   function closeOrder() {
-    navigate('/home');
+    navigate('/checkout');
   }
   return (
     <CartPage>
@@ -64,6 +65,7 @@ export default function Cart() {
       <CartContainer>
         <CartTitle>Carinho</CartTitle>
         <CartItens>
+          {console.log(itens)}
           {!itens.length ? <EmptyCart>O carrinho está vazio</EmptyCart>
             : itens.map((iten, index) => <Iten key={index}>
             <Img src={iten.imgeUrl}/>

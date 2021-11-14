@@ -21,7 +21,7 @@ export default function Header() {
           </Link>
           <Search>
             <InputSearch />
-            <BsSearch color="#ffffff" font-size="26px" font-weight="bold" />
+            <BsSearch color="#ffffff" fontSize="26px" fontWeight="bold" />
           </Search>
           <Link to="/cart">
             <BsCartCheckFill />
