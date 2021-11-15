@@ -10,7 +10,7 @@ import {
   PageOrder,
   PageTitle,
 } from '../styles/PageTitle';
-import ProductsCard from '../ProductsCard';
+import ProductsCard from '../ProductsCard.js';
 import { ProductsContainer } from '../styles/ProductsStyle';
 import {
   getProducts,
@@ -50,7 +50,6 @@ export default function Home() {
           <Arrow navbar={navbar} />
         </Order>
       </PageOrder>
-
       {navbar ? (
         <MenuOrder setNavbar={setNavbar} setProducts={setProducts} />
       ) : (

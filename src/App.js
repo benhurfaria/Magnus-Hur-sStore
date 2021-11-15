@@ -5,6 +5,7 @@ import Signup from './Components/Signup';
 import Signin from './Components/Signin';
 import { ContextLogin } from './Services/Context';
 import Home from './Components/pages/Home';
+import Product from './Components/pages/Product';
 
 export default function App() {
   const [loggedUser, setLoggedUser] = useState({});
@@ -15,6 +16,7 @@ export default function App() {
                 <Routes>
                     <Route exact path="/" element={<Home/>}/>
                     <Route exact path="/home" element={<Home />}/>
+                    <Route exact path="product/:id" element={<Product />} />
                     <Route exact path="/sign-in" element={<Signin/>}/>
                     <Route exact path="/sign-up" element={<Signup/>}/>
                     <Route path='/cart' element={<Cart/>}/>

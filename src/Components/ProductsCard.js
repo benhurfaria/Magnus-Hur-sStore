@@ -1,20 +1,22 @@
+/* eslint-disable no-param-reassign */
 import { useNavigate } from 'react-router-dom';
 import {
   Card, Image, Price, ProductName,
 } from './styles/ProductsStyle';
 
 export default function ProductsCard({
-  id, name, price, image,
+  id, name, price, image, type,
 }) {
   const navigate = useNavigate();
 
-  // eslint-disable-next-line no-param-reassign
-  price = (price / 100).toFixed(2).replace('.', ',');
+  if (price) {
+    price = (price / 100).toFixed(2).replace('.', ',');
+  }
   return (
-    <Card onClick={() => navigate(`/product/${id}`)}>
-      <Image src={image} alt={name} />
-      <ProductName>{name}</ProductName>
-      <Price>R$ {price}</Price>
+    <Card type={type} onClick={() => navigate(`/product/${id}`)}>
+      <Image type={type} src={image} alt={name} />
+      {name ? <ProductName type={type}>{name}</ProductName> : ''}
+      {price ? <Price type={type}>R$ {price}</Price> : ''}
     </Card>
   );
 }

@@ -14,7 +14,9 @@ function removeFromCart() {
 function getCartItens(id) {
   const route = '/cartitens/';
   const promise = axios.get(urlApi + route + id);
-  promise.catch((err) => { console.log(err); });
+  promise.catch((err) => {
+    console.log(err);
+  });
   return promise;
 }
 
@@ -47,7 +49,9 @@ function signUp(body) {
 function itenRemove(id) {
   const route = `/remove/${id}`;
   const promise = axios.delete(urlApi + route);
-  promise.catch((err) => { console.log(err); });
+  promise.catch((err) => {
+    console.log(err);
+  });
 }
 
 function getProducts() {
@@ -70,6 +74,11 @@ function getProductsHigher() {
   return promise;
 }
 
+function getProductById(id) {
+  const promise = axios.get(`${api}products/${id}`);
+  return promise;
+}
+
 export {
   signIn,
   signUp,
@@ -80,4 +89,5 @@ export {
   removeFromCart,
   getCartItens,
   itenRemove,
+  getProductById,
 };
