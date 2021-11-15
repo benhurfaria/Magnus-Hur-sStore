@@ -2,8 +2,8 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { getProductById } from '../../Services/Api';
-
+import { getProductById, addToCart } from '../../Services/Api';
+import { getStoredUser } from '../../Services/loginPersistence.js';
 import { PageContainer } from '../styles/PageContainer';
 import Header from '../Header';
 import ProductsCard from '../ProductsCard';
@@ -27,27 +27,35 @@ export default function Product() {
   let price = 0;
   let description = '';
   let image = '';
+  let idProducts = 0;
 
   useEffect(() => {
     getProductById(id)
-      .then((res) => setProductInfo(res.data))
+      .then((res) => {
+        setProductInfo(res.data);
+        // console.log(res.data.id);
+      })
       .catch((err) => console.log(err));
 
     name = productInfo.name;
     price = productInfo.price;
     description = productInfo.description;
     image = productInfo.imgeUrl;
-
+    idProducts = productInfo.id;
     setProductToBuy({
       name,
       price,
       description,
       image,
       quant,
+      idProducts,
     });
   }, [quant]);
 
   function toBuy() {
+    console.log(productToBuy);
+    const userId = getStoredUser().id;
+    addToCart(productToBuy, userId);
     window.localStorage.setItem('carrinho', JSON.stringify(productToBuy));
   }
 

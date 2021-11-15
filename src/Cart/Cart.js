@@ -8,12 +8,13 @@ import { getStoredUser } from '../Services/loginPersistence.js';
 import {
   Top, CartPage, Menu, CartContainer, CartItens, CartResume, Iten,
   Img, RemoveButton, ItenValue, CloseOrder, FinalValue,
-  CartMenu, CartCounter, CartTitle, EmptyCart,
+  CartMenu, CartCounter, CartTitle, EmptyCart, ItenQtd,
 } from './Cart_style.js';
 
 export default function Cart() {
   const [counter, setCounter] = useState(0);
   const [itens, setItens] = useState([]);
+  const [qtd, setQtd] = useState(1);
   useEffect(() => {
     const { id } = getStoredUser();
     const promise = getCartItens(id);
@@ -24,7 +25,7 @@ export default function Cart() {
   }, []);
   function getTotalValue() {
     let total = 0;
-    itens.forEach((iten) => { total += iten.unitaryPrice; });
+    itens.forEach((iten) => { total += iten.unitaryPrice * iten.qtd; });
     return (total / 100).toFixed(2);
   }
   const navigate = useNavigate();
@@ -65,13 +66,15 @@ export default function Cart() {
       <CartContainer>
         <CartTitle>Carinho</CartTitle>
         <CartItens>
-          {console.log(itens)}
           {!itens.length ? <EmptyCart>O carrinho está vazio</EmptyCart>
             : itens.map((iten, index) => <Iten key={index}>
             <Img src={iten.imgeUrl}/>
               {iten.name}
             <RemoveButton id={iten.cartProductsId}
             onClick={(e) => removeIten(e)}>Remover</RemoveButton>
+            <ItenQtd>
+            <div>Qtd: {iten.qtd}</div>
+            </ItenQtd>
             <ItenValue> R$ {(iten.unitaryPrice / 100).toFixed(2).replace('.', ',')}</ItenValue>
          </Iten>)}
         </CartItens>

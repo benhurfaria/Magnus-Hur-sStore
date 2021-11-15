@@ -1,28 +1,26 @@
+/* eslint-disable consistent-return */
 /* eslint-disable no-console */
-import axios from 'axios';
+import axios, { Axios } from 'axios';
 import { api } from './urlApi';
 
-const urlApi = 'http://localhost:4000';
 function removeFromCart() {
   const body = {
     id: 1,
   };
-  const route = '/removefromcart';
-  axios.post(urlApi + route, body);
+  const route = 'removefromcart';
+  axios.post(api + route, body);
 }
 
 function getCartItens(id) {
-  const route = '/cartitens/';
-  const promise = axios.get(urlApi + route + id);
-  promise.catch((err) => {
-    console.log(err);
-  });
+  const route = 'cartitens/';
+  const promise = axios.get(api + route + id);
+  promise.catch((err) => { console.log(err); });
   return promise;
 }
 
 function signIn(body) {
-  const route = '/sign-in';
-  const promise = axios.post(urlApi + route, body);
+  const route = 'sign-in';
+  const promise = axios.post(api + route, body);
   promise.catch((err) => {
     if (err.response.status === 401) {
       // eslint-disable-next-line no-alert
@@ -47,8 +45,8 @@ function signUp(body) {
   return promise;
 }
 function itenRemove(id) {
-  const route = `/remove/${id}`;
-  const promise = axios.delete(urlApi + route);
+  const route = `remove/${id}`;
+  const promise = axios.delete(api + route);
   promise.catch((err) => {
     console.log(err);
   });
@@ -78,6 +76,18 @@ function getProductById(id) {
   const promise = axios.get(`${api}products/${id}`);
   return promise;
 }
+function addToCart(productToBuy, userId) {
+  const body = {
+    name: productToBuy.name,
+    price: productToBuy.price,
+    imgeUrl: productToBuy.image,
+    qtd: productToBuy.quant,
+    id: productToBuy.idProducts,
+  };
+  console.log(body);
+  const promise = axios.post(`${api}addtocart/${userId}`, body);
+  promise.catch((err) => { console.log(err); });
+}
 
 export {
   signIn,
@@ -90,4 +100,5 @@ export {
   getCartItens,
   itenRemove,
   getProductById,
+  addToCart,
 };
