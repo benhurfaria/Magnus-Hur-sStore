@@ -1,40 +1,40 @@
-import { useContext, useEffect, useState } from "react";
-import { PageContainer } from "../styles/PageContainer";
-import Header from "../Header";
+/* eslint-disable no-console */
+import { useEffect, useState } from 'react';
+import { PageContainer } from '../styles/PageContainer';
+import Header from '../Header';
 import {
-    Arrow,
-    Menu,
-    MenuBar,
-    Order,
-    PageOrder,
-    PageTitle,
-} from "../styles/PageTitle";
-import ProductsCard from "../ProductsCard";
-import { ProductsContainer } from "../styles/ProductsStyle";
+  Arrow,
+  Menu,
+  MenuBar,
+  Order,
+  PageOrder,
+  PageTitle,
+} from '../styles/PageTitle';
+import ProductsCard from '../ProductsCard.js';
+import { ProductsContainer } from '../styles/ProductsStyle';
 import {
     getCart,
-    getProducts,
-    getProductsAlpha,
-    getProductsHigher,
-    getProductsLower,
-} from "../../Services/Api";
-import { ContextLogin } from "../../Services/Context";
+  getProducts,
+  getProductsAlpha,
+  getProductsHigher,
+  getProductsLower,
+// eslint-disable-next-line import/named
+} from '../../Services/Api';
+    import { ContextLogin } from "../../Services/Context";
 import { getStoredUser } from "../../Services/loginPersistence";
 
-export default function Home({ cart, setCart }) {
-    const user = useContext(ContextLogin);
-    const loggedUser = getStoredUser();
-    user.loggedUser = loggedUser;
+export default function Home() {
+  const [modal, setModal] = useState(false);
 
-    const [navbar, setNavbar] = useState(false);
+  const [navbar, setNavbar] = useState(false);
 
-    function navbarCard() {
-        if (navbar === false) {
-            setNavbar(true);
-        }
+  function navbarCard() {
+    if (navbar === false) {
+      setNavbar(true);
     }
+  }
 
-    const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState([]);
 
     useEffect(() => {
         getProducts()
@@ -60,7 +60,7 @@ export default function Home({ cart, setCart }) {
                 <PageTitle>Aproveite</PageTitle>
                 <Order onClick={() => setNavbar(true)}>
                     <span>Ordenar por</span>
-                    <Arrow navbar={navbar} />
+                    <Arrow transform={navbar ? 'rotate(180deg)' : ''} />
                 </Order>
             </PageOrder>
 

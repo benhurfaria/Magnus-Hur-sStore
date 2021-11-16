@@ -89,7 +89,7 @@ export default function Signup() {
             setDisable(false);
         }
     }
-
+  
     return (
         <Principal>
             <Link to="/">

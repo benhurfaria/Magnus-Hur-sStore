@@ -1,18 +1,22 @@
-import { InputSearch, Title } from "./styles/PageTitle";
-
+import { MdExitToApp } from 'react-icons/md';
 import {
     BsCartCheckFill,
     BsFillPersonFill,
     BsPersonCheckFill,
     BsSearch,
 } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { InputSearch, Title } from './styles/PageTitle';
 import {
-    MenuHeader,
-    PageHeader,
-    Search,
-    StoreTitle,
-} from "./styles/PageContainer";
+  MenuHeader,
+  PageHeader,
+  Search,
+  StoreTitle,
+  Icon,
+} from './styles/PageContainer';
+import { getStoredUser } from '../Services/loginPersistence.js';
+import { logoutToken } from '../Services/Api.js';
 import { useContext } from "react";
 import { ContextLogin } from "../Services/Context";
 import { getCart } from "../Services/Api";
@@ -28,42 +32,55 @@ export default function Header() {
             .catch((err) => console.log(err));
     }
 
-    return (
-        <PageHeader>
-            <StoreTitle>
-                <Link to="/">
-                    <Title>Magnus&Hur's</Title>
-                </Link>
-                <MenuHeader>
-                    {user ? (
-                        <Link to="/login">
-                            <BsFillPersonFill />
-                        </Link>
-                    ) : (
-                        <Link to="/">
-                            <BsPersonCheckFill />
-                        </Link>
-                    )}
-                    <Search>
-                        <InputSearch />
-                        <BsSearch
-                            color="#ffffff"
-                            fontSize="26px"
-                            fontWeight="bold"
-                            cursor="pointer"
-                        />
-                    </Search>
 
-                    <Link to="/carrinho">
-                        <BsCartCheckFill />
-                        {user.cart.length ? (
-                            <span fontSize="15px">{user.cart.length} </span>
-                        ) : (
-                            ""
-                        )}
-                    </Link>
-                </MenuHeader>
-            </StoreTitle>
-        </PageHeader>
-    );
+  function logout() {
+    localStorage.clear();
+    setUser(getStoredUser());
+    logoutToken(token);
+  }
+
+  function login() {
+    history('/sign-in');
+  }
+
+  useEffect(() => {
+    setUser(getStoredUser());
+  }, []);
+
+  return (
+    <PageHeader>
+      <StoreTitle>
+        <Icon>
+          <Title>Magnus&Hur's</Title>
+          {user ? (
+            <MdExitToApp onClick={logout} />
+          ) : (
+            <span onClick={login}>Login</span>
+          )}
+        </Icon>
+        <MenuHeader>
+          <Link to="/">
+            <BsFillPersonFill />
+          </Link>
+          <Search>
+            <InputSearch />
+            <BsSearch
+              color="#ffffff"
+              fontSize="26px"
+              fontWeight="bold"
+              cursor="pointer"
+            />
+          </Search>
+          <Link to="/cart">
+            <BsCartCheckFill />
+                {user.cart.length ? (
+                    <span fontSize="15px">{user.cart.length} </span>
+                ) : (
+                    ""
+                )}
+          </Link>
+        </MenuHeader>
+      </StoreTitle>
+    </PageHeader>
+  );
 }

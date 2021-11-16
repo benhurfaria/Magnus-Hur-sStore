@@ -6,57 +6,27 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState } from "react";
 import Home from "./Components/pages/Home";
 import Product from "./Components/pages/Product";
+import Cart from './Cart/Cart';
 
-function App() {
-    const [loggedUser, setLoggedUser] = useState(null);
+export default function App() {
+    const [loggedUser, setLoggedUser] = useState({});
     const [cart, setCart] = useState([]);
 
     useEffect(() => {}, [cart]);
 
-    return (
-        <ContextLogin.Provider
-            value={{ loggedUser, setLoggedUser, cart, setCart }}
-        >
+  return (
+
+        <ContextLogin.Provider value = {{ loggedUser, setLoggedUser }}>
             <BrowserRouter>
                 <Routes>
-                    <Route
-                        exact
-                        path="/login"
-                        element={
-                            <Signin
-                                loggedUser={loggedUser}
-                                setLoggedUser={setLoggedUser}
-                            />
-                        }
-                    />
-                    <Route
-                        exact
-                        path="/"
-                        element={
-                            <Home
-                                cart={cart}
-                                setCart={setCart}
-                                loggedUser={loggedUser}
-                            />
-                        }
-                    />
-                    <Route
-                        exact
-                        path="product/:id"
-                        element={
-                            <Product
-                                cart={cart}
-                                setCart={setCart}
-                                loggedUser={loggedUser}
-                            />
-                        }
-                    />
-                    <Route exact path="/sign-in" element={<Signin />} />
-                    <Route exact path="/sign-up" element={<Signup />} />
+                    <Route exact path="/" element={<Home/>}/>
+                    <Route exact path="/home" element={<Home />}/>
+                    <Route exact path="product/:id" element={<Product />} />
+                    <Route exact path="/sign-in" element={<Signin/>}/>
+                    <Route exact path="/sign-up" element={<Signup/>}/>
+                    <Route path='/cart' element={<Cart/>}/>
                 </Routes>
             </BrowserRouter>
         </ContextLogin.Provider>
-    );
+  );
 }
-
-export default App;
