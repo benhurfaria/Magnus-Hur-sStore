@@ -13,7 +13,7 @@ export default function Signin(){
     const history = useNavigate();
 
     function login(){
-
+        localStorage.clear();
         const body = {
             email,
             password

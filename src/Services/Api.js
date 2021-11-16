@@ -51,6 +51,11 @@ function getProductById(id) {
     return promise;
 }
 
+function logoutToken(config) {
+    const promise = axios.delete(`${api}sign-out`, config);
+    return promise;
+}
+
 export {
     signIn,
     signUp,
@@ -59,4 +64,5 @@ export {
     getProductsLower,
     getProductsHigher,
     getProductById,
+    logoutToken,
 }
