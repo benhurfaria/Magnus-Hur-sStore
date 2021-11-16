@@ -36,8 +36,6 @@ export default function Cart() {
       if (el.cartProductsId !== Number(e.target.id)) {
         stay.push(el);
       } else {
-        // eslint-disable-next-line no-console
-        console.log(el.cartProductsId);
         itenRemove(el.cartProductsId);
         remove.push(el);
       }

@@ -84,7 +84,6 @@ function addToCart(productToBuy, userId) {
     qtd: productToBuy.quant,
     id: productToBuy.idProducts,
   };
-  console.log(body);
   const promise = axios.post(`${api}addtocart/${userId}`, body);
   promise.catch((err) => { console.log(err); });
 }

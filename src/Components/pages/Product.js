@@ -53,7 +53,6 @@ export default function Product() {
   }, [quant]);
 
   function toBuy() {
-    console.log(productToBuy);
     const userId = getStoredUser().id;
     addToCart(productToBuy, userId);
     window.localStorage.setItem('carrinho', JSON.stringify(productToBuy));
