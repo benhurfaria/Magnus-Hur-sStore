@@ -6,6 +6,7 @@ import ProductsCard from "../ProductsCard";
 import { ProductsContainer } from "../styles/ProductsStyle";
 import { getProducts, getProductsAlpha, getProductsHigher, getProductsLower } from "../../Services/Api";
 
+
 export default function Home() {
     const [modal, setModal] = useState(false);
 
