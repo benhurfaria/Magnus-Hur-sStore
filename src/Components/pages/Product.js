@@ -1,33 +1,46 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-import { getProductById } from "../../Services/Api";
+import { addToCart, getProductById } from "../../Services/Api";
 
 import { PageContainer } from "../styles/PageContainer";
 import Header from "../Header";
 import ProductsCard from "../ProductsCard";
-import { CardInfo, Description, Quant, QuantModify } from "../styles/ProductsStyle";
+import {
+    CardInfo,
+    Description,
+    Quant,
+    QuantModify,
+} from "../styles/ProductsStyle";
 import { Button } from "../styles/ButtonStyle";
+import { BsSave } from "react-icons/bs";
+import { ContextLogin } from "../../Services/Context";
 
-export default function Product() {
+export default function Product({ cart, setCart, loggedUser }) {
     const { id } = useParams();
-
-    const [productInfo, setProductInfo] = useState({})
-    const [productToBuy, setProductToBuy] = useState({})
-    const [buttonName, setButtonName] = useState('Adicionar no carrinho');
+    const user = JSON.parse(sessionStorage.getItem("user"));
+    const [productInfo, setProductInfo] = useState({});
+    const [productToBuy, setProductToBuy] = useState({});
+    const [buttonName, setButtonName] = useState("Adicionar no carrinho");
     const [quant, setQuant] = useState(1);
 
-    let name = ''
-    let price = 0
-    let description = ''
-    let image = ''
-    
+    let name = "";
+    let price = 0;
+    let description = "";
+    let image = "";
+    console.log(user);
     useEffect(() => {
-        getProductById(id).then((res) => setProductInfo(res.data)).catch((err) => console.log(err))
+        getProductById(id)
+            .then((res) => setProductInfo(res.data))
+            .catch((err) => console.log(err));
+        if (price) {
+            price = (price / 100).toFixed(2).replace(".", ",");
+        }
+        localStorage.setItem("cart", cart);
 
         name = productInfo.name;
         price = productInfo.price;
-        description = productInfo.description;
+        description = productInfo.descrition;
         image = productInfo.imgeUrl;
 
         setProductToBuy({
@@ -36,32 +49,74 @@ export default function Product() {
             description,
             image,
             quant,
-        })
-    }, [quant]);
+        });
+    }, [quant, cart]);
 
     function toBuy() {
-        console.log('compra')
-        window.localStorage.setItem('carrinho', JSON.stringify(productToBuy));
+        setCart([...cart, productToBuy]);
+        if (!loggedUser) {
+            save();
+        } else {
+            addToCart(
+                {
+                    price: productInfo.price,
+                    quant: quant,
+                    id: id,
+                },
+                loggedUser.token
+            ).then((res) => console.log(res.data));
+        }
     }
 
-console.log(productToBuy)
+    function save() {
+        localStorage.cart = cart;
+    }
+
+    if (productInfo.price) {
+        productInfo.price = (productInfo.price / 100)
+            .toFixed(2)
+            .replace(".", ",");
+    }
+
     return (
         <PageContainer>
-            <Header />
+            <Header loggedUser={loggedUser} cart={cart} />
 
             <CardInfo>
-                <ProductsCard id={productInfo.id} image={productInfo.imgeUrl} type='one' />
+                <ProductsCard
+                    id={productInfo.id}
+                    image={productInfo.imgeUrl}
+                    type="one"
+                />
                 <Description>
-                    <span>{ productInfo.name }</span>
-                    <span>R$ { productInfo.price }</span>
-                    
-                    <Quant>Quantidade      <QuantModify color='red' onClick={() => (quant > 1 ? (setQuant(quant - 1)) : '')}>-</QuantModify> <span>{quant}</span> <QuantModify color='green' onClick={() => (setQuant(quant + 1))} ><strong> +</strong></QuantModify>
+                    <span>{productInfo.name}</span>
+                    <span>R$ {productInfo.price}</span>
+
+                    <Quant>
+                        Quantidade{" "}
+                        <QuantModify
+                            color="red"
+                            onClick={() =>
+                                quant > 1 ? setQuant(quant - 1) : ""
+                            }
+                        >
+                            -
+                        </QuantModify>{" "}
+                        <span>{quant}</span>{" "}
+                        <QuantModify
+                            color="green"
+                            onClick={() => setQuant(quant + 1)}
+                        >
+                            <strong> +</strong>
+                        </QuantModify>
                     </Quant>
 
-                    <Button size='buy' onClick={ () => toBuy() }>{ buttonName }</Button>
-                    <br/>
+                    <Button size="buy" onClick={toBuy}>
+                        {buttonName}
+                    </Button>
+                    <br />
                     <span>Descrição:</span>
-                    <li>{ productInfo.descrition }</li>
+                    <li>{productInfo.descrition}</li>
                 </Description>
             </CardInfo>
         </PageContainer>

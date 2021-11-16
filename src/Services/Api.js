@@ -51,6 +51,22 @@ function getProductById(id) {
     return promise;
 }
 
+function addToCart(body, token) {
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    };
+    console.log(body);
+    const promise = axios.post(`${api}add`, body, config);
+    return promise;
+}
+
+function getCart(id) {
+    const promise = axios.get(`${api}cart`);
+    return promise;
+}
+
 export {
     signIn,
     signUp,
@@ -59,4 +75,6 @@ export {
     getProductsLower,
     getProductsHigher,
     getProductById,
+    addToCart,
+    getCart,
 };

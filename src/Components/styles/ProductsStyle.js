@@ -65,6 +65,7 @@ const Image = styled.img`
 
 const ProductName = styled.h3`
     width: 30vw;
+    height: 37px;
     color: #283d3b;
 
     font-size: 20px;
@@ -82,7 +83,7 @@ const Price = styled.h3`
     width: 30vw;
     color: #772e25;
 
-    font-size: 20px;
+    font-size: 18px;
     text-align: left;
 
     margin-bottom: 10px;
