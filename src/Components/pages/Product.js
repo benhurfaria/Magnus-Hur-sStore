@@ -16,19 +16,22 @@ import { Button } from "../styles/ButtonStyle";
 import { BsSave } from "react-icons/bs";
 import { ContextLogin } from "../../Services/Context";
 
-export default function Product({ cart, setCart, loggedUser }) {
+export default function Product() {
+    const user = useContext(ContextLogin);
+    const { loggedUser, cart, setCart } = user;
     const { id } = useParams();
-    const user = JSON.parse(sessionStorage.getItem("user"));
+
     const [productInfo, setProductInfo] = useState({});
     const [productToBuy, setProductToBuy] = useState({});
     const [buttonName, setButtonName] = useState("Adicionar no carrinho");
     const [quant, setQuant] = useState(1);
 
-    let name = "";
-    let price = 0;
-    let description = "";
-    let image = "";
+    let name = productInfo.name;
+    let price = productInfo.price;
+    let description = productInfo.descrition;
+    let image = productInfo.imgeUrl;
     console.log(user);
+
     useEffect(() => {
         getProductById(id)
             .then((res) => setProductInfo(res.data))
@@ -37,11 +40,10 @@ export default function Product({ cart, setCart, loggedUser }) {
             price = (price / 100).toFixed(2).replace(".", ",");
         }
         localStorage.setItem("cart", cart);
-
-        name = productInfo.name;
-        price = productInfo.price;
-        description = productInfo.descrition;
-        image = productInfo.imgeUrl;
+        // console.log(cart.includes(productToBuy)
+        // if (cart.includes(productToBuy)) {
+        //     console.log("includes");
+        // }
 
         setProductToBuy({
             name,
@@ -50,7 +52,7 @@ export default function Product({ cart, setCart, loggedUser }) {
             image,
             quant,
         });
-    }, [quant, cart]);
+    }, [name, price, description, image, quant, cart]);
 
     function toBuy() {
         setCart([...cart, productToBuy]);

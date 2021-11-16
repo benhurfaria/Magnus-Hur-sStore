@@ -6,17 +6,16 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState } from "react";
 import Home from "./Components/pages/Home";
 import Product from "./Components/pages/Product";
-import { CartContext } from "./contexts/CartContext";
 
 function App() {
     const [loggedUser, setLoggedUser] = useState(null);
-    const [cart, setCart] = useState(null);
+    const [cart, setCart] = useState([]);
 
     useEffect(() => {}, [cart]);
 
     return (
         <ContextLogin.Provider
-            value={(loggedUser, setLoggedUser, cart, setCart)}
+            value={{ loggedUser, setLoggedUser, cart, setCart }}
         >
             {/* <CartContext.Provider value={(cart, setCart)}> */}
             <BrowserRouter>

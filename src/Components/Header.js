@@ -1,6 +1,5 @@
 import { InputSearch, Title } from "./styles/PageTitle";
 
-import { HiOutlineMenu } from "react-icons/hi";
 import {
     BsCartCheckFill,
     BsFillPersonFill,
@@ -16,18 +15,19 @@ import {
 } from "./styles/PageContainer";
 import { useContext } from "react";
 import { ContextLogin } from "../Services/Context";
-import { CartContext } from "../contexts/CartContext";
 import { getCart } from "../Services/Api";
 
 export default function Header() {
     //{ cart, loggedUser }
     const user = useContext(ContextLogin);
     // const user = JSON.parse(sessionStorage.getItem("user"));
-    const cart = useContext(CartContext);
+    // const cart = useContext(CartContext);
     console.log(user);
 
-    if (user) {
-        getCart().then((res) => console.log(res.data));
+    if (user.loggedUser?.token) {
+        getCart()
+            .then((res) => console.log(res.data))
+            .catch((err) => console.log(err));
     }
 
     return (
@@ -58,7 +58,7 @@ export default function Header() {
 
                     <Link to="/carrinho">
                         <BsCartCheckFill />
-                        <span fontSize="15px">{cart} </span>
+                        <span fontSize="15px">{user.cart} </span>
                     </Link>
                 </MenuHeader>
             </StoreTitle>
