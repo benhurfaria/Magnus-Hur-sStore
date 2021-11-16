@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import { IoCart, IoArrowBack } from 'react-icons/io5';
 import { Link, useNavigate } from 'react-router-dom';
 import { getCartItens, itenRemove } from '../Services/Api.js';
-import { getStoredUser } from '../Services/loginPersistence.js';
 import {
   Top, CartPage, Menu, CartContainer, CartItens, CartResume, Iten,
   Img, RemoveButton, ItenValue, CloseOrder, FinalValue,
