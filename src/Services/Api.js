@@ -5,14 +5,6 @@ import axios, { Axios } from 'axios';
 import { api } from './urlApi';
 import { getStoredUser } from './loginPersistence';
 
-function removeFromCart() {
-  const body = {
-    id: 1,
-  };
-  const route = 'removefromcart';
-  axios.post(api + route, body);
-}
-
 function getCartItens() {
   const route = 'cartitens';
   let token = getStoredUser()?.token;
@@ -119,6 +111,19 @@ function logoutToken(config) {
   const promise = axios.delete(`${api}sign-out`, config);
   return promise;
 }
+function addToSales(itens) {
+  const body = {
+    itens,
+  };
+  const token = getStoredUser()?.token;
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const route = 'sales';
+  axios.post(api + route, body, config);
+}
 
 export {
   signIn,
@@ -127,10 +132,10 @@ export {
   getProductsAlpha,
   getProductsLower,
   getProductsHigher,
-  removeFromCart,
   getCartItens,
   itenRemove,
   getProductById,
   addToCart,
   logoutToken,
+  addToSales,
 };

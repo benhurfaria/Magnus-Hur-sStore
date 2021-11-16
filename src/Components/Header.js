@@ -1,6 +1,7 @@
 import { MdExitToApp } from 'react-icons/md';
+import { IoCart } from 'react-icons/io5';
 import { HiOutlineMenu } from 'react-icons/hi';
-import { BsCartCheckFill, BsSearch } from 'react-icons/bs';
+import { BsSearch } from 'react-icons/bs';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { InputSearch, Title } from './styles/PageTitle';
@@ -64,7 +65,7 @@ export default function Header() {
             />
           </Search>
           <Link to="/cart">
-            <BsCartCheckFill />
+            <IoCart color="#ffffff" fontSize="30px" />
           </Link>
         </MenuHeader>
       </StoreTitle>
