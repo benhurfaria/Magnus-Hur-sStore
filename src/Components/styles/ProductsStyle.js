@@ -30,31 +30,51 @@ const Card = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  margin-bottom: 20px;
+    margin: ${(props) => (props.type === "all" ? "" : "140px auto 0")};
+    margin-bottom: 20px;
 
-  padding: 10px;
+    padding: 10px;
 
-  @media (min-width: 1100px) {
-    width: 20vw;
+    cursor: pointer;
 
-    margin-right: 20px;
-  }
+    @media (min-width: 1100px) {
+        width: ${(props) => (props.type === "all" ? "20vw" : "40vw")};
+
+        margin-right: ${(props) => (props.type === "all" ? "20px" : "")};
+        margin-left: ${(props) => (props.type === "all" ? "" : "20px")};
+    }
 `;
 
 const Image = styled.img`
-  width: ${(props) => (props.type === 'all' ? '15vw' : '80vw')};
-  height: ${(props) => (props.type === 'all' ? '15vw' : '80vw')};
-  border-radius: 10px;
-  border: 2px solid #326273;
-  object-fit: cover;
-  margin-bottom: ${(props) => (props.type === 'all' ? '10px' : '20px')};
-  margin-top: ${(props) => (props.type === 'all' ? '' : '20px')};
+    width: ${(props) => (props.type === "all" ? "30vw" : "80vw")};
+    height: ${(props) => (props.type === "all" ? "30vw" : "80vw")};
 
-  @media (min-width: 1100px) {
-    width: ${(props) => (props.type === 'all' ? '15vw' : '30vw')};
-    height: ${(props) => (props.type === 'all' ? '15vw' : '30vw')};
-  }
+    border-radius: 10px;
+    border: 2px solid #326273;
+
+    object-fit: cover;
+    margin-bottom: ${(props) => (props.type === "all" ? "10px" : "20px")};
+    margin-top: ${(props) => (props.type === "all" ? "" : "20px")};
+
+    @media (min-width: 1100px) {
+        width: ${(props) => (props.type === "all" ? "15vw" : "30vw")};
+        height: ${(props) => (props.type === "all" ? "15vw" : "30vw")};
+    }
 `;
+
+// const ProductName = styled.h3`
+//     width: 30vw;
+//     height: 37px;
+//     color: #283d3b;
+    
+//   padding: 10px;
+
+//   @media (min-width: 1100px) {
+//     width: 20vw;
+
+//     margin-right: 20px;
+//   }
+// `;
 
 const ProductName = styled.h3`
   width: 30vw;
@@ -72,11 +92,11 @@ const ProductName = styled.h3`
 `;
 
 const Price = styled.h3`
-  width: 30vw;
-  color: #772e25;
+    width: 30vw;
+    color: #772e25;
 
-  font-size: 20px;
-  text-align: left;
+    font-size: 18px;
+    text-align: left;
 
   margin-bottom: 10px;
   overflow: hidden;
@@ -90,7 +110,7 @@ const Description = styled.div`
   width: 90vw;
   height: 35vw;
 
-  color: #283d3b;
+    color: #283d3b;
 
   display: flex;
   flex-direction: column;
@@ -140,18 +160,18 @@ const Quant = styled.h2`
 `;
 
 const QuantModify = styled.span`
-  color: ${(props) => (props.color === 'red' ? '#C44536' : '#197278')};
-  cursor: pointer;
+    color: ${(props) => (props.color === "red" ? "#C44536" : "#197278")};
+    cursor: pointer;
 `;
 
 export {
-  ProductsContainer,
-  Card,
-  Image,
-  ProductName,
-  Price,
-  Description,
-  CardInfo,
-  Quant,
-  QuantModify,
+    ProductsContainer,
+    Card,
+    Image,
+    ProductName,
+    Price,
+    Description,
+    CardInfo,
+    Quant,
+    QuantModify,
 };

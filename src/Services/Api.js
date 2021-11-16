@@ -1,9 +1,25 @@
-/* eslint-disable no-alert */
-/* eslint-disable consistent-return */
-/* eslint-disable no-console */
 import axios, { Axios } from 'axios';
 import { api } from './urlApi';
 import { getStoredUser } from './loginPersistence';
+
+function signIn(body) {
+    const promise = axios.post(api + "sign-in", body);
+    return promise;
+}
+
+function signUp(body) {
+    const promise = axios.post(api + "sign-up", body);
+
+    return promise;
+}
+
+function removeFromCart() {
+  const body = {
+    id: 1,
+  };
+  const route = 'removefromcart';
+  axios.post(api + route, body);
+}
 
 function getCartItens() {
   const route = 'cartitens';
@@ -32,6 +48,7 @@ function signIn(body) {
   });
   return promise;
 }
+    
 function signUp(body) {
   const route = 'sign-up';
   const promise = axios.post(api + route, body);
@@ -47,6 +64,7 @@ function signUp(body) {
   });
   return promise;
 }
+    
 function itenRemove(id) {
   const token = getStoredUser()?.token;
   const config = {
@@ -89,6 +107,29 @@ function getProductById(id) {
   const promise = axios.get(`${api}products/${id}`);
   return promise;
 }
+
+function addToCart(body, token) {
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    };
+
+    const promise = axios.post(`${api}add`, body, config);
+    return promise;
+}
+
+function getCart(token) {
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    };
+
+    const promise = axios.get(`${api}cart`, config);
+    return promise;
+}
+
 function addToCart(productToBuy) {
   const body = {
     name: productToBuy.name,
@@ -107,7 +148,12 @@ function addToCart(productToBuy) {
   promise.catch((err) => { console.log(err); });
 }
 
-function logoutToken(config) {
+function logoutToken(token) {
+    const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
   const promise = axios.delete(`${api}sign-out`, config);
   return promise;
 }
@@ -137,5 +183,6 @@ export {
   getProductById,
   addToCart,
   logoutToken,
+  getCart,
   addToSales,
 };

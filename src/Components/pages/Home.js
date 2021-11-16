@@ -13,12 +13,15 @@ import {
 import ProductsCard from '../ProductsCard.js';
 import { ProductsContainer } from '../styles/ProductsStyle';
 import {
+    getCart,
   getProducts,
   getProductsAlpha,
   getProductsHigher,
   getProductsLower,
 // eslint-disable-next-line import/named
 } from '../../Services/Api';
+    import { ContextLogin } from "../../Services/Context";
+import { getStoredUser } from "../../Services/loginPersistence";
 
 export default function Home() {
   const [modal, setModal] = useState(false);
@@ -33,77 +36,89 @@ export default function Home() {
 
   const [products, setProducts] = useState([]);
 
-  useEffect(() => {
-    getProducts()
-      .then((res) => setProducts(res.data))
-      .catch((err) => console.log(err));
-  }, []);
+    useEffect(() => {
+        getProducts()
+            .then((res) => setProducts(res.data))
+            .catch((err) => console.log(err));
 
-  return (
-    <PageContainer>
-      <Header />
+        if (loggedUser.token) {
+            getCart(loggedUser.token)
+                .then((res) => {
+                    user.cart = res.data;
+                })
+                .catch((err) => console.log(err));
+        }
+    }, []);
+    if (!loggedUser?.token) {
+        let cart = localStorage.getItem("cart");
+    }
+    return (
+        <PageContainer>
+            <Header />
 
-      <PageOrder>
-        <PageTitle>Aproveite</PageTitle>
-        <Order onClick={() => setNavbar(true)}>
-          <span>Ordenar por</span>
-          <Arrow transform={navbar ? 'rotate(180deg)' : ''} />
-        </Order>
-      </PageOrder>
-      {navbar ? (
-        <MenuOrder setNavbar={setNavbar} setProducts={setProducts} />
-      ) : (
-        ''
-      )}
-      <ProductsContainer>
-        {products.length ? (
-          products.map((prod, index) => (
-            <ProductsCard
-              key={index}
-              id={prod.id}
-              name={prod.name}
-              price={prod.price}
-              image={prod.imgeUrl}
-            />
-          ))
-        ) : (
-          <span>Não há produtos cadastrados</span>
-        )}
-      </ProductsContainer>
-    </PageContainer>
-  );
+            <PageOrder>
+                <PageTitle>Aproveite</PageTitle>
+                <Order onClick={() => setNavbar(true)}>
+                    <span>Ordenar por</span>
+                    <Arrow transform={navbar ? 'rotate(180deg)' : ''} />
+                </Order>
+            </PageOrder>
+
+            {navbar ? (
+                <MenuOrder setNavbar={setNavbar} setProducts={setProducts} />
+            ) : (
+                ""
+            )}
+            <ProductsContainer>
+                {products.length ? (
+                    products.map((prod, index) => (
+                        <ProductsCard
+                            key={index}
+                            id={prod.id}
+                            name={prod.name}
+                            price={prod.price}
+                            image={prod.imgeUrl}
+                            type="all"
+                        />
+                    ))
+                ) : (
+                    <span>Não há produtos cadastrados</span>
+                )}
+            </ProductsContainer>
+        </PageContainer>
+    );
 }
 
 function MenuOrder({ setNavbar, setProducts }) {
-  function closeNavbar() {
-    setNavbar(false);
-  }
+    function closeNavbar() {
+        setNavbar(false);
+    }
 
-  function alpha() {
-    getProductsAlpha()
-      .then((res) => setProducts(res.data))
-      .catch((err) => console.log(err));
-  }
+    function alpha() {
+        getProductsAlpha()
+            .then((res) => setProducts(res.data))
+            .catch((err) => console.log(err));
+    }
 
-  function lowerPrice() {
-    getProductsLower()
-      .then((res) => setProducts(res.data))
-      .catch((err) => console.log(err));
-  }
+    function lowerPrice() {
+        getProductsLower()
+            .then((res) => setProducts(res.data))
+            .catch((err) => console.log(err));
+    }
 
-  function higherPrice() {
-    getProductsHigher()
-      .then((res) => setProducts(res.data))
-      .catch((err) => console.log(err));
-  }
+    function higherPrice() {
+        getProductsHigher()
+            .then((res) => setProducts(res.data))
+            .catch((err) => console.log(err));
+    }
 
-  return (
-    <Menu onClick={closeNavbar}>
-      <MenuBar>
-        <button onClick={() => alpha()}>A-Z</button>
-        <button onClick={() => lowerPrice()}>Menor preço</button>
-        <button onClick={() => higherPrice()}>Maior preço</button>
-      </MenuBar>
-    </Menu>
-  );
+    return (
+        <Menu onClick={closeNavbar}>
+            <MenuBar>
+                <button onClick={() => alpha()}>A-Z</button>
+                <button onClick={() => lowerPrice()}>Menor preço</button>
+                <button onClick={() => higherPrice()}>Maior preço</button>
+            </MenuBar>
+        </Menu>
+    );
 }

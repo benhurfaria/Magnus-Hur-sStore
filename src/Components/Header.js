@@ -1,4 +1,12 @@
 import { MdExitToApp } from 'react-icons/md';
+
+import {
+    BsCartCheckFill,
+    BsFillPersonFill,
+    BsPersonCheckFill,
+    BsSearch,
+} from "react-icons/bs";
+
 import { IoCart } from 'react-icons/io5';
 import { HiOutlineMenu } from 'react-icons/hi';
 import { BsSearch } from 'react-icons/bs';
@@ -13,23 +21,27 @@ import {
   Icon,
 } from './styles/PageContainer';
 import { getStoredUser } from '../Services/loginPersistence.js';
-
 import { logoutToken } from '../Services/Api.js';
+import { useContext } from "react";
+import { ContextLogin } from "../Services/Context";
+import { getCart } from "../Services/Api";
+import { getStoredUser } from "../Services/loginPersistence";
 
 export default function Header() {
-  const history = useNavigate();
-  const [user, setUser] = useState(getStoredUser());
+    const user = useContext(ContextLogin);
+    const loggedUser = getStoredUser();
 
-  const config = {
-    headers: {
-      Authorization: `Bearer ${getStoredUser()?.token}`,
-    },
-  };
+    if (loggedUser?.token) {
+        getCart()
+            .then((res) => console.log(res.data))
+            .catch((err) => console.log(err));
+    }
+
 
   function logout() {
     localStorage.clear();
     setUser(getStoredUser());
-    logoutToken(config);
+    logoutToken(token);
   }
 
   function login() {
@@ -52,8 +64,8 @@ export default function Header() {
           )}
         </Icon>
         <MenuHeader>
-          <Link to="/home">
-            <HiOutlineMenu />
+          <Link to="/">
+            <BsFillPersonFill />
           </Link>
           <Search>
             <InputSearch />
@@ -65,7 +77,12 @@ export default function Header() {
             />
           </Search>
           <Link to="/cart">
-            <IoCart color="#ffffff" fontSize="30px" />
+            <BsCartCheckFill />
+                {user.cart.length ? (
+                    <span fontSize="15px">{user.cart.length} </span>
+                ) : (
+                    ""
+                )}
           </Link>
         </MenuHeader>
       </StoreTitle>

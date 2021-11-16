@@ -12,7 +12,9 @@ const Title = styled.h1`
   font-weight: bold;
   text-align: center;
 
-  margin-bottom: 10px;
+    cursor: pointer;
+
+    margin-bottom: 10px;
 `;
 
 const PageOrder = styled.div`
@@ -111,10 +113,11 @@ const PageTitle = styled.h2`
     margin: 140px 0 20px;
   }
 
-  @media (min-width: 1100px) {
-    width: 60vw;
-    margin: 140px 0 20px;
-  }
+    @media (min-width: 1100px) {
+        width: 60vw;
+        margin: 140px 0 20px;
+        font-size: 40px;
+    }
 `;
 
 const InputSearch = styled.input`
@@ -136,30 +139,32 @@ const Order = styled.div`
   width: 40vw;
   height: 26px;
 
-  border-radius: 5px;
-  background-color: #ffffff;
-  box-shadow: 0px 0px 2px 2px rgba(227, 151, 116, 0.2);
+    border-radius: 5px;
+    background-color: #ffffff;
+    box-shadow: 0px 0px 2px 2px rgba(227, 151, 116, 0.2);
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-  margin: 140px auto 20px;
+    margin: 140px auto 20px;
 
-  span {
-    color: #283d3b;
-    text-align: center;
-  }
+    cursor: pointer;
 
-  @media (min-width: 700px) {
-    width: 20vw;
-    margin: 140px 0 20px;
-  }
+    span {
+        color: #283D3B;
+        text-align: center;
+    }
+    
+    @media (min-width: 700px) {
+        width: 20vw;
+        margin: 140px 0 20px;
+    }
 
-  @media (min-width: 1100px) {
-    width: 10vw;
-    height: 26px;
-  }
+    @media (min-width: 1100px) {
+        width: 10vw;
+        height: 26px;
+    }
 `;
 
 const Arrow = styled(FaChevronDown)`

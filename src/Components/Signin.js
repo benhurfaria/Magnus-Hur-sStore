@@ -1,54 +1,105 @@
-/* eslint-disable no-unused-expressions */
-import { Link, useNavigate } from 'react-router-dom';
-import { useState, useContext } from 'react';
-import { ContextLogin } from '../Services/Context.js';
-import { storeUser, getStoredUser } from '../Services/loginPersistence.js';
-import {
-  Principal, Texto, Input, Botao,
-} from './Signin_style.js';
-import { signIn } from '../Services/Api';
-import Title from './Title';
+import Title from "./Title";
+import { Link, useNavigate } from "react-router-dom";
+import { useContext, useState } from "react";
+import { getStoredUser, storeUser } from "../Services/loginPersistence.js";
+import { Principal, Texto, Input, Botao } from "./Signin_style.js";
+import { signIn } from "../Services/Api";
+import Loader from "react-loader-spinner";
+import ModalError from "./shared/ModalError";
+import { ContextLogin } from "../Services/Context";
 
 export default function Signin() {
-  const { setLoggedUser } = useContext(ContextLogin);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const history = useNavigate();
+    const user = useContext(ContextLogin);
+    const [loggedUser, setLoggedUser] = useState(getStoredUser());
+    // user.loggedUser = loggedUser;
 
-  function login() {
-    localStorage.clear();
-    const body = {
-      email,
-      password,
-    };
+    const [modal, setModal] = useState(false);
+    const [message, setMessage] = useState(1);
 
-    const promise = signIn(body);
+    const [buttonName, setButtonName] = useState("Entrar");
+    const [disable, setDisable] = useState(false);
 
-    promise.then((resp) => {
-      storeUser(resp.data);
-      setLoggedUser(resp.data);
-      history('/home');
-    });
-  }
-  return (
-    <Principal>
-      <Title />
-      <Input
-        placeholder="E-mail"
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <Input
-        placeholder="Senha"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        type="password"
-      />
-      <Botao onClick={login}>Login</Botao>
-      <Link to="/sign-up">
-        <Texto>Primeira vez? Cadastre-se</Texto>
-      </Link>
-    </Principal>
-  );
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const history = useNavigate();
+
+    function errorLogin(err) {
+        if (err.response.status === 400) {
+            setMessage("Digite dados válidos");
+            setModal(true);
+        }
+        if (err.response.status === 401) {
+            setMessage("Email ou senha incorretos");
+            setModal(true);
+        }
+        if (err.response.status === 500) {
+            setMessage("Servidor fora de área, tente novamente mais tarde");
+            setModal(true);
+            history("/");
+        }
+        setButtonName("Entrar");
+        setDisable(false);
+    }
+
+    function login(event) {
+        setDisable(true);
+        event.preventDefault();
+        const body = {
+            email,
+            password,
+        };
+
+        setButtonName(
+            <Loader
+                type="ThreeDots"
+                color="#ffffff"
+                height={46}
+                width={46}
+                timeout={2000} //2 secs
+            />
+        );
+
+        const promise = signIn(body);
+
+        promise
+            .then((resp) => {
+                storeUser(resp.data);
+                setLoggedUser(resp.data);
+                setTimeout(() => {
+                    history("/");
+                }, 2000);
+            })
+            .catch((err) => {
+                errorLogin(err);
+            });
+    }
+
+    return (
+        <Principal>
+            <Title />
+            <form onSubmit={login}>
+                <Input
+                    placeholder="E-mail"
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+                <Input
+                    placeholder="Senha"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    type="password"
+                />
+                <Botao type="submit" disabled={disable}>
+                    {buttonName}
+                </Botao>
+            </form>
+
+            <Link to="/sign-up">
+                <Texto>Primeira vez? Cadastre-se</Texto>
+            </Link>
+
+            {modal ? <ModalError message={message} setModal={setModal} /> : ""}
+        </Principal>
+    );
 }
