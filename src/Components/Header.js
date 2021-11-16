@@ -16,15 +16,13 @@ import {
 import { useContext } from "react";
 import { ContextLogin } from "../Services/Context";
 import { getCart } from "../Services/Api";
+import { getStoredUser } from "../Services/loginPersistence";
 
 export default function Header() {
-    //{ cart, loggedUser }
     const user = useContext(ContextLogin);
-    // const user = JSON.parse(sessionStorage.getItem("user"));
-    // const cart = useContext(CartContext);
-    console.log(user);
+    const loggedUser = getStoredUser();
 
-    if (user.loggedUser?.token) {
+    if (loggedUser?.token) {
         getCart()
             .then((res) => console.log(res.data))
             .catch((err) => console.log(err));
@@ -58,7 +56,11 @@ export default function Header() {
 
                     <Link to="/carrinho">
                         <BsCartCheckFill />
-                        <span fontSize="15px">{user.cart} </span>
+                        {user.cart.length ? (
+                            <span fontSize="15px">{user.cart.length} </span>
+                        ) : (
+                            ""
+                        )}
                     </Link>
                 </MenuHeader>
             </StoreTitle>

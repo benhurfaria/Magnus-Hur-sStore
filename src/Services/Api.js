@@ -9,15 +9,6 @@ function signIn(body) {
 function signUp(body) {
     const promise = axios.post(api + "sign-up", body);
 
-    // promise.catch((err) => {
-    //     if (err.response.status === 400) {
-    //         alert("Não foi possivel cadastrar");
-    //     }
-    //     if (err.response.status === 500) {
-    //         alert("servidor fora de área");
-    //     }
-    // });
-
     return promise;
 }
 
@@ -52,13 +43,19 @@ function addToCart(body, token) {
             Authorization: `Bearer ${token}`,
         },
     };
-    console.log(body);
+
     const promise = axios.post(`${api}add`, body, config);
     return promise;
 }
 
-function getCart(id) {
-    const promise = axios.get(`${api}cart`);
+function getCart(token) {
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    };
+
+    const promise = axios.get(`${api}cart`, config);
     return promise;
 }
 

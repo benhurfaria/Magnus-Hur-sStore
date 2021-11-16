@@ -13,8 +13,8 @@ import {
     QuantModify,
 } from "../styles/ProductsStyle";
 import { Button } from "../styles/ButtonStyle";
-import { BsSave } from "react-icons/bs";
 import { ContextLogin } from "../../Services/Context";
+import Loader from "react-loader-spinner";
 
 export default function Product() {
     const user = useContext(ContextLogin);
@@ -30,7 +30,6 @@ export default function Product() {
     let price = productInfo.price;
     let description = productInfo.descrition;
     let image = productInfo.imgeUrl;
-    console.log(user);
 
     useEffect(() => {
         getProductById(id)
@@ -40,10 +39,6 @@ export default function Product() {
             price = (price / 100).toFixed(2).replace(".", ",");
         }
         localStorage.setItem("cart", cart);
-        // console.log(cart.includes(productToBuy)
-        // if (cart.includes(productToBuy)) {
-        //     console.log("includes");
-        // }
 
         setProductToBuy({
             name,
@@ -55,6 +50,15 @@ export default function Product() {
     }, [name, price, description, image, quant, cart]);
 
     function toBuy() {
+        setButtonName(
+            <Loader
+                type="ThreeDots"
+                color="#ffffff"
+                height={46}
+                width={46}
+                timeout={2000} //2 secs
+            />
+        );
         setCart([...cart, productToBuy]);
         if (!loggedUser) {
             save();
@@ -66,11 +70,18 @@ export default function Product() {
                     id: id,
                 },
                 loggedUser.token
-            ).then((res) => console.log(res.data));
+            )
+                .then(
+                    (res) => (
+                        setButtonName("Remover item do carrinho"),
+                        save(res.data)
+                    )
+                )
+                .catch((err) => console.log(err));
         }
     }
 
-    function save() {
+    function save(res) {
         localStorage.cart = cart;
     }
 

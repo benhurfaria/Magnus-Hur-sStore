@@ -12,19 +12,19 @@ import {
 import ProductsCard from "../ProductsCard";
 import { ProductsContainer } from "../styles/ProductsStyle";
 import {
+    getCart,
     getProducts,
     getProductsAlpha,
     getProductsHigher,
     getProductsLower,
 } from "../../Services/Api";
 import { ContextLogin } from "../../Services/Context";
+import { getStoredUser } from "../../Services/loginPersistence";
 
 export default function Home({ cart, setCart }) {
     const user = useContext(ContextLogin);
-    const { loggedUser } = user;
-    console.log(loggedUser);
-
-    const [modal, setModal] = useState(false);
+    const loggedUser = getStoredUser();
+    user.loggedUser = loggedUser;
 
     const [navbar, setNavbar] = useState(false);
 
@@ -41,9 +41,17 @@ export default function Home({ cart, setCart }) {
             .then((res) => setProducts(res.data))
             .catch((err) => console.log(err));
 
-        localStorage.getItem("cart", cart);
+        if (loggedUser.token) {
+            getCart(loggedUser.token)
+                .then((res) => {
+                    user.cart = res.data;
+                })
+                .catch((err) => console.log(err));
+        }
     }, []);
-
+    if (!loggedUser?.token) {
+        let cart = localStorage.getItem("cart");
+    }
     return (
         <PageContainer>
             <Header />

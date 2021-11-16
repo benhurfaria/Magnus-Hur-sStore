@@ -17,7 +17,6 @@ function App() {
         <ContextLogin.Provider
             value={{ loggedUser, setLoggedUser, cart, setCart }}
         >
-            {/* <CartContext.Provider value={(cart, setCart)}> */}
             <BrowserRouter>
                 <Routes>
                     <Route
@@ -56,7 +55,6 @@ function App() {
                     <Route exact path="/sign-up" element={<Signup />} />
                 </Routes>
             </BrowserRouter>
-            {/* </CartContext.Provider> */}
         </ContextLogin.Provider>
     );
 }

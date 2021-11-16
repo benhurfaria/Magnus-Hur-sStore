@@ -1,13 +1,18 @@
 import Title from "./Title";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { storeUser } from "../Services/loginPersistence.js";
+import { useContext, useState } from "react";
+import { getStoredUser, storeUser } from "../Services/loginPersistence.js";
 import { Principal, Texto, Input, Botao } from "./Signin_style.js";
 import { signIn } from "../Services/Api";
 import Loader from "react-loader-spinner";
 import ModalError from "./shared/ModalError";
+import { ContextLogin } from "../Services/Context";
 
-export default function Signin({ loggedUser, setLoggedUser }) {
+export default function Signin() {
+    const user = useContext(ContextLogin);
+    const [loggedUser, setLoggedUser] = useState(getStoredUser());
+    // user.loggedUser = loggedUser;
+
     const [modal, setModal] = useState(false);
     const [message, setMessage] = useState(1);
 
@@ -23,11 +28,17 @@ export default function Signin({ loggedUser, setLoggedUser }) {
             setMessage("Digite dados válidos");
             setModal(true);
         }
+        if (err.response.status === 401) {
+            setMessage("Email ou senha incorretos");
+            setModal(true);
+        }
         if (err.response.status === 500) {
             setMessage("Servidor fora de área, tente novamente mais tarde");
             setModal(true);
             history("/");
         }
+        setButtonName("Entrar");
+        setDisable(false);
     }
 
     function login(event) {
