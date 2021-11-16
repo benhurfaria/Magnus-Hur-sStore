@@ -1,7 +1,8 @@
+/* eslint-disable no-unused-expressions */
 import { Link, useNavigate } from 'react-router-dom';
 import { useState, useContext } from 'react';
 import { ContextLogin } from '../Services/Context.js';
-import { storeUser } from '../Services/loginPersistence.js';
+import { storeUser, getStoredUser } from '../Services/loginPersistence.js';
 import {
   Principal, Texto, Input, Botao,
 } from './Signin_style.js';

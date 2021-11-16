@@ -1,7 +1,9 @@
+/* eslint-disable no-alert */
 /* eslint-disable consistent-return */
 /* eslint-disable no-console */
 import axios, { Axios } from 'axios';
 import { api } from './urlApi';
+import { getStoredUser } from './loginPersistence';
 
 function removeFromCart() {
   const body = {
@@ -11,9 +13,18 @@ function removeFromCart() {
   axios.post(api + route, body);
 }
 
-function getCartItens(id) {
-  const route = 'cartitens/';
-  const promise = axios.get(api + route + id);
+function getCartItens() {
+  const route = 'cartitens';
+  let token = getStoredUser()?.token;
+  if (typeof token === 'undefined') {
+    token = '';
+  }
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const promise = axios.get(api + route, config);
   promise.catch((err) => { console.log(err); });
   return promise;
 }
@@ -45,10 +56,20 @@ function signUp(body) {
   return promise;
 }
 function itenRemove(id) {
+  const token = getStoredUser()?.token;
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
   const route = `remove/${id}`;
-  const promise = axios.delete(api + route);
+  const promise = axios.delete(api + route, config);
   promise.catch((err) => {
-    console.log(err);
+    if (err.response.statusCode === 403) {
+      alert('usuario não logado');
+    } else {
+      console.log(err);
+    }
   });
 }
 
@@ -76,7 +97,7 @@ function getProductById(id) {
   const promise = axios.get(`${api}products/${id}`);
   return promise;
 }
-function addToCart(productToBuy, userId) {
+function addToCart(productToBuy) {
   const body = {
     name: productToBuy.name,
     price: productToBuy.price,
@@ -84,7 +105,16 @@ function addToCart(productToBuy, userId) {
     qtd: productToBuy.quant,
     id: productToBuy.idProducts,
   };
-  const promise = axios.post(`${api}addtocart/${userId}`, body);
+  let token = getStoredUser()?.token;
+  if (typeof token === 'undefined') {
+    token = '';
+  }
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const promise = axios.post(`${api}addtocart`, body, config);
   promise.catch((err) => { console.log(err); });
 }
 

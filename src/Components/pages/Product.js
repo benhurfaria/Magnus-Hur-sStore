@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 import { getProductById, addToCart } from '../../Services/Api';
 import { getStoredUser } from '../../Services/loginPersistence.js';
@@ -17,7 +17,7 @@ import { Button } from '../styles/ButtonStyle';
 
 export default function Product() {
   const { id } = useParams();
-
+  const navigate = useNavigate();
   const [productInfo, setProductInfo] = useState({});
   const [productToBuy, setProductToBuy] = useState({});
   const [buttonName, setButtonName] = useState('Adicionar no carrinho');
@@ -53,8 +53,7 @@ export default function Product() {
   }, [quant]);
 
   function toBuy() {
-    const userId = getStoredUser().id;
-    addToCart(productToBuy, userId);
+    addToCart(productToBuy);
     window.localStorage.setItem('carrinho', JSON.stringify(productToBuy));
   }
 

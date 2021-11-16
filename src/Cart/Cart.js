@@ -14,10 +14,8 @@ import {
 export default function Cart() {
   const [counter, setCounter] = useState(0);
   const [itens, setItens] = useState([]);
-  const [qtd, setQtd] = useState(1);
   useEffect(() => {
-    const { id } = getStoredUser();
-    const promise = getCartItens(id);
+    const promise = getCartItens();
     promise.then((res) => {
       setItens(res.data.itens);
       setCounter(res.data.qtd);
