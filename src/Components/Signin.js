@@ -25,14 +25,14 @@ export default function Signin(){
 
             storeUser(resp.data);
             setLoggedUser(resp.data);
-            history("/store");
+            history("/home");
 
         });
     }
 
     /*useEffect(()=>{
         const user = getStoredUser();
-        user ? history("/store") : history("/sign-in");
+        user ? history("/home") : history("/sign-in");
     },[history]);*/
     
     return(
