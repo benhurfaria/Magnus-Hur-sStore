@@ -37,7 +37,7 @@ export default function Header() {
 
   useEffect(() => {
     setUser(getStoredUser());
-  }, [user]);
+  }, []);
 
   return (
     <PageHeader>
