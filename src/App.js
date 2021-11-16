@@ -7,6 +7,8 @@ import { useState } from "react";
 import Home from "./Components/pages/Home";
 import Product from "./Components/pages/Product";
 import Cart from './Cart/Cart';
+import Cart from './Cart/Cart';
+import Checkout from './Components/Checkout';
 
 export default function App() {
     const [loggedUser, setLoggedUser] = useState({});
@@ -25,6 +27,7 @@ export default function App() {
                     <Route exact path="/sign-in" element={<Signin/>}/>
                     <Route exact path="/sign-up" element={<Signup/>}/>
                     <Route path='/cart' element={<Cart/>}/>
+                    <Route path='/checkout' element={<Checkout/>}/>
                 </Routes>
             </BrowserRouter>
         </ContextLogin.Provider>

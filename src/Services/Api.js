@@ -157,6 +157,19 @@ function logoutToken(token) {
   const promise = axios.delete(`${api}sign-out`, config);
   return promise;
 }
+function addToSales(itens) {
+  const body = {
+    itens,
+  };
+  const token = getStoredUser()?.token;
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const route = 'sales';
+  axios.post(api + route, body, config);
+}
 
 export {
   signIn,
@@ -165,11 +178,11 @@ export {
   getProductsAlpha,
   getProductsLower,
   getProductsHigher,
-  removeFromCart,
   getCartItens,
   itenRemove,
   getProductById,
   addToCart,
   logoutToken,
   getCart,
+  addToSales,
 };

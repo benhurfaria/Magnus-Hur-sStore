@@ -171,9 +171,6 @@ const Arrow = styled(FaChevronDown)`
   width: 16px;
   height: 16px;
   color: #283d3b;
-
-  transform: ${(props) => (props.navbar === true ? 'rotate(180deg)' : null)};
-
   cursor: pointer;
 
   margin: 0 15px;

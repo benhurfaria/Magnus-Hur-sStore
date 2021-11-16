@@ -1,10 +1,15 @@
 import { MdExitToApp } from 'react-icons/md';
+
 import {
     BsCartCheckFill,
     BsFillPersonFill,
     BsPersonCheckFill,
     BsSearch,
 } from "react-icons/bs";
+
+import { IoCart } from 'react-icons/io5';
+import { HiOutlineMenu } from 'react-icons/hi';
+import { BsSearch } from 'react-icons/bs';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { InputSearch, Title } from './styles/PageTitle';
