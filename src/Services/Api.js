@@ -105,10 +105,7 @@ function addToCart(productToBuy) {
     qtd: productToBuy.quant,
     id: productToBuy.idProducts,
   };
-  let token = getStoredUser()?.token;
-  if (typeof token === 'undefined') {
-    token = '';
-  }
+  const token = getStoredUser()?.token;
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
