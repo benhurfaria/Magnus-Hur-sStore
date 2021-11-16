@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const Principal = styled.div`
     width: 100vw;
@@ -8,7 +8,7 @@ const Principal = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-` 
+`;
 const Texto = styled.p`
     text-align: center;
     margin-top:20px;
@@ -16,7 +16,8 @@ const Texto = styled.p`
     font-weight: bold;
     font-size: 14px;
     color: #326273;
-`
+`;
+
 const Botao = styled.button`
     background-color: #326273;
     width: 100%;
@@ -30,7 +31,7 @@ const Botao = styled.button`
     :focus{
         outline: transparent;
     }
-`
+`;
 const Input = styled.input`
     background: #FFFFFF;
     border-radius: 5px;
@@ -49,4 +50,6 @@ const Input = styled.input`
     }
 `;
 
-export {Principal, Texto, Botao, Input}
+export {
+  Principal, Texto, Botao, Input,
+};

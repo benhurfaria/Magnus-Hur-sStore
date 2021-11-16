@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const Titulo = styled.h1`
     font-family: 'Mochiy Pop P One', sans-serif;
@@ -10,4 +10,5 @@ const Titulo = styled.h1`
     margin: 80px;
 `;
 
-export{ Titulo}
+// eslint-disable-next-line import/prefer-default-export
+export { Titulo };

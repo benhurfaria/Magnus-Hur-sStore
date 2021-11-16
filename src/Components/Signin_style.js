@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const Principal = styled.div`
     width: 100vw;
@@ -8,14 +8,15 @@ const Principal = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-` 
+`;
 const Texto = styled.p`
     text-align: center;
     margin-top:20px;
     font-family: 'Mochiy Pop P One', sans-serif;
     font-size: 14px;
     color: #326273;
-`
+`;
+
 const Input = styled.input`
     background: #FFFFFF;
     border-radius: 5px;
@@ -48,6 +49,8 @@ const Botao = styled.button`
     :focus{
         outline: transparent;
     }
-`
+`;
 
-export {Principal, Texto, Input, Botao}
+export {
+  Principal, Texto, Input, Botao,
+};
