@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
 import { getProductById, addToCart } from '../../Services/Api';
-import { getStoredUser } from '../../Services/loginPersistence.js';
 import { PageContainer } from '../styles/PageContainer';
 import Header from '../Header';
 import ProductsCard from '../ProductsCard';

@@ -44,7 +44,22 @@ const StoreTitle = styled.div`
 
   margin: 0 auto;
 `;
+const Icon = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
+  svg {
+    font-size: 30px;
+    color: #ffffff;
+  }
+  span {
+    font-size: 15px;
+    font-weight: bold;
+    margin-right: 15px;
+    color: #ffffff;
+  }
+`;
 const MenuHeader = styled.div`
   width: 90vw;
   height: 70px;
@@ -85,5 +100,5 @@ const Search = styled.div`
 `;
 
 export {
-  PageContainer, PageHeader, StoreTitle, MenuHeader, Search,
+  PageContainer, PageHeader, StoreTitle, MenuHeader, Search, Icon,
 };

@@ -118,6 +118,11 @@ function addToCart(productToBuy) {
   promise.catch((err) => { console.log(err); });
 }
 
+function logoutToken(config) {
+  const promise = axios.delete(`${api}sign-out`, config);
+  return promise;
+}
+
 export {
   signIn,
   signUp,
@@ -130,4 +135,5 @@ export {
   itenRemove,
   getProductById,
   addToCart,
+  logoutToken,
 };

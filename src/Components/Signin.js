@@ -16,11 +16,14 @@ export default function Signin() {
   const history = useNavigate();
 
   function login() {
+    localStorage.clear();
     const body = {
       email,
       password,
     };
+
     const promise = signIn(body);
+
     promise.then((resp) => {
       storeUser(resp.data);
       setLoggedUser(resp.data);
@@ -28,14 +31,24 @@ export default function Signin() {
     });
   }
   return (
-        <Principal>
-            <Title/>
-            <Input placeholder="E-mail" type="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
-            <Input placeholder="Senha" value={password} onChange={(e) => setPassword(e.target.value)} type="password"/>
-            <Botao onClick={login}>Login</Botao>
-            <Link to="/sign-up">
-                <Texto>Primeira vez? Cadastre-se</Texto>
-            </Link>
-        </Principal>
+    <Principal>
+      <Title />
+      <Input
+        placeholder="E-mail"
+        type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
+      <Input
+        placeholder="Senha"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        type="password"
+      />
+      <Botao onClick={login}>Login</Botao>
+      <Link to="/sign-up">
+        <Texto>Primeira vez? Cadastre-se</Texto>
+      </Link>
+    </Principal>
   );
 }
