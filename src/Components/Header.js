@@ -63,7 +63,7 @@ export default function Header() {
               cursor="pointer"
             />
           </Search>
-          <Link to="/carrinho">
+          <Link to="/cart">
             <BsCartCheckFill />
           </Link>
         </MenuHeader>
