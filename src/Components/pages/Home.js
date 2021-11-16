@@ -47,7 +47,7 @@ export default function Home() {
         <PageTitle>Aproveite</PageTitle>
         <Order onClick={() => setNavbar(true)}>
           <span>Ordenar por</span>
-          <Arrow navbar={navbar} />
+          <Arrow transform={navbar ? 'rotate(180deg)' : ''} />
         </Order>
       </PageOrder>
       {navbar ? (
